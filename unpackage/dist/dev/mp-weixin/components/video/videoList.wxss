@@ -1,0 +1,30 @@
+
+.right-box {
+	position: absolute;
+	bottom: 180rpx;
+	right: 30rpx;
+	z-index: 200;
+}
+.left-box {
+	position: absolute;
+	bottom: 100rpx;
+	left: 30rpx;
+	z-index: 200;
+}
+.video-list {
+	width: 100%;
+	height: 100%;
+}
+.swiper-box {
+	height: 100%;
+	width: 100%;
+}
+.swiper {
+	height: 100%;
+	width: 100%;
+}
+.swiper-item {
+	width: 100%;
+	height: 100%;
+}
+

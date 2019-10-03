@@ -1,0 +1,74 @@
+{
+	"pages": [
+		{
+			"path": "pages/video/video",
+			"style": {}
+		},
+		{
+			"path": "pages/search/search",
+			"style": {}
+		},
+		{
+			"path": "pages/search/result",
+			"style": {}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {}
+		},
+		{
+			"path": "pages/mine/mine",
+			"style": {}
+		}, {
+			"path": "pages/regist/regist",
+			"style": {}
+		}, {
+			"path": "pages/index/index",
+			"style": {
+				"enablePullDownRefresh": true
+			}
+		}, {
+			"path": "pages/upload/upload",
+			"style": {}
+		}
+	],
+	"tabBar": {
+		"custom": true,
+		"color": "#7A7E83",
+		"selectedColor": "#BAEFFF",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/images/home.png",
+				"selectedIconPath": "static/images/home_actived.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/mine/mine",
+				"iconPath": "static/images/mine.png",
+				"selectedIconPath": "static/images/mine_actived.png",
+				"text": "我的"
+			}
+		]
+	},
+	"globalStyle": {
+		"mp-alipay": {
+			/* 支付宝小程序特有相关 */
+			"transparentTitle": "always",
+			"allowsBounceVertical": "NO"
+		},
+		"navigationStyle": "custom",
+		"navigationBarBackgroundColor": "#0081ff",
+		"navigationBarTitleText": "Snowy 短视频",
+		"navigationBarTextStyle": "white"
+	},
+	"condition": { //模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式(list 的索引项)
+		"list": [{
+			"name": "", //模式名称
+			"path": "", //启动页面，必选
+			"query": "" //启动参数，在页面的onLoad函数里面得到
+		}]
+	}
+}

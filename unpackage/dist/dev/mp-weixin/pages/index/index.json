@@ -1,0 +1,7 @@
+{
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "index-list": "/components/indexList/indexList",
+    "intro-swiper": "/components/introSwiper/introSwiper"
+  }
+}

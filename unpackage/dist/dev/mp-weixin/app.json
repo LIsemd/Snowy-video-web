@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/video/video",
+    "pages/search/search",
+    "pages/search/result",
+    "pages/login/login",
+    "pages/mine/mine",
+    "pages/regist/regist",
+    "pages/index/index",
+    "pages/upload/upload"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationStyle": "custom",
+    "navigationBarBackgroundColor": "#0081ff",
+    "navigationBarTitleText": "Snowy 短视频",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#7A7E83",
+    "selectedColor": "#BAEFFF",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/images/home.png",
+        "selectedIconPath": "static/images/home_actived.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "iconPath": "static/images/mine.png",
+        "selectedIconPath": "static/images/mine_actived.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {
+    "cu-custom": "/components/cu-custom/cu-custom",
+    "yo-dialog": "/components/yo-dialog/yo-dialog"
+  }
+}
