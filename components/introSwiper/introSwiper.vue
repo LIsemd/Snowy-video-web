@@ -19,15 +19,23 @@
 				swiperList: [{
 					id: 0,
 					type: 'image',
-					url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg'
+					url: 'https://s2.ax1x.com/2019/10/04/uDkWOs.jpg'
 				}, {
 					id: 1,
 					type: 'image',
-					url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big37006.jpg',
+					url: 'https://s2.ax1x.com/2019/10/04/uDkhmn.png',
 				}, {
 					id: 2,
 					type: 'image',
-					url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big39000.jpg'
+					url: 'https://s2.ax1x.com/2019/10/04/uDk5T0.png'
+				}, {
+					id: 3,
+					type: 'image',
+					url: 'https://s2.ax1x.com/2019/10/04/uDkTYT.jpg'
+				}, {
+					id: 4,
+					type: 'image',
+					url: 'https://s2.ax1x.com/2019/10/04/uDk7fU.jpg'
 				}],
 				dotStyle: false,
 				towerStart: 0,

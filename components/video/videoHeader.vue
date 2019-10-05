@@ -2,7 +2,8 @@
 	    <view class="video-header">
 	        <view class="icon cuIcon-search" @click="handleSearch"></view> 
 	        <view class="middle">
-	            <view class="text">推荐</view>|
+	            <view class="text">推荐</view>
+				<text style="font-size: 34rpx;">|</text>
 	            <view class="text">同城</view>
 	        </view>
 	    </view>
@@ -17,6 +18,7 @@
 		},
 		methods: {
 			handleSearch() {
+				getApp().globalData.isSearch = true
 				uni.navigateTo({
 					url:'../../pages/search/search'
 				})
@@ -31,7 +33,7 @@
 	    line-height: 50rpx;
 	    width: 100%;
 	    position: fixed;
-	    top: 70rpx;
+	    top: 85rpx;
 	    left: 0;
 	    margin: 0 auto;
 	    background: rgba(0,0,0,0);

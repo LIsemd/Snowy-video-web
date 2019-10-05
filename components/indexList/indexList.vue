@@ -47,9 +47,17 @@
 		},
 		methods:{
 			toVideoPage(index) {
-				uni.navigateTo({
-					url:'../../pages/video/video?current=' + index
-				})
+				getApp().globalData.currentPage = index
+				if (getApp().globalData.isSearch) {
+					// 如果是查询状态，则关闭其他页面
+					uni.reLaunch({
+						url:'../../pages/video/video',
+					})
+				} else {
+					uni.navigateTo({
+						url:'../../pages/video/video',
+					})
+				}
 			}
 		}
 	}

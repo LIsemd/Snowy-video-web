@@ -1,6 +1,16 @@
 {
 	"pages": [
 		{
+			"path": "pages/index/index",
+			"style": {
+				"enablePullDownRefresh": true
+			}
+		},{
+			"path": "pages/login/login",
+			"style": {}
+		},
+
+		{
 			"path": "pages/video/video",
 			"style": {}
 		},
@@ -12,21 +22,13 @@
 			"path": "pages/search/result",
 			"style": {}
 		},
-		{
-			"path": "pages/login/login",
-			"style": {}
-		},
+
 		{
 			"path": "pages/mine/mine",
 			"style": {}
 		}, {
 			"path": "pages/regist/regist",
 			"style": {}
-		}, {
-			"path": "pages/index/index",
-			"style": {
-				"enablePullDownRefresh": true
-			}
 		}, {
 			"path": "pages/upload/upload",
 			"style": {}

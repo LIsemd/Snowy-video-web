@@ -1,20 +1,20 @@
 <template>
 	<view class="list-right">
 		<view class="author-img">
-			<img class="img" src="../../static/images/avatar.jpg" />
+			<img class="img" :src="avatar" />
 			<view class="follow cuIcon-add" v-show="showFollow" @click="hideFollow"></view>
 		</view>
 		<view class="right-box">
 			<view class="icon cuIcon-likefill" :class="{fav: isFav}" @click="changeColor"></view>
-			<view class="count">72.2w</view>
+			<view class="count">{{videoInfo.likeCounts}}</view>
 		</view>
 		<view class="right-box">
 			<view class="icon cuIcon-commentfill"></view>
-			<view class="count">1.8w</view>
+			<view class="count">0</view>
 		</view>
 		<view class="right-box">
 			<view class="icon cuIcon-forwardfill"></view>
-			<view class="count">6645</view>
+			<view class="count">0</view>
 		</view>
 		<view class="music-img" :class="{'pauseAnimate': isPauseAnimate}">
 			<img class="img" src="../../static/images/avatar2.jpg" />
@@ -28,9 +28,15 @@
 	            return {
 	                showFollow: true,
 	                isFav: false,
-					isPauseAnimate: true
+					isPauseAnimate: true,
+					videoInfo: this.videoList[this.index],
+					avatar: ''
 	            }
 	        },
+			mounted() {
+				this.avatar = getApp().globalData.baseUrl + this.videoInfo.avatar
+			},
+			props: ['index','videoList'],
 	        methods: {
 	            hideFollow() {
 	                this.showFollow = false;

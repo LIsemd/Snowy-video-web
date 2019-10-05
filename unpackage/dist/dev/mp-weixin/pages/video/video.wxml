@@ -1,1 +1,1 @@
-<view class="content data-v-c242dd80"><video-header vue-id="1" class="data-v-c242dd80" bind:__l="__l"></video-header><video-list vue-id="2" list="{{list}}" class="data-v-c242dd80" bind:__l="__l"></video-list><video-footer vue-id="3" class="data-v-c242dd80" bind:__l="__l"></video-footer></view>
+<view class="content data-v-c242dd80"><video-header vue-id="1" class="data-v-c242dd80" bind:__l="__l"></video-header><video-list vue-id="2" class="data-v-c242dd80" bind:__l="__l"></video-list><video-footer vue-id="3" class="data-v-c242dd80" bind:__l="__l"></video-footer></view>

@@ -4,7 +4,7 @@
     line-height: 50rpx;
     width: 100%;
     position: fixed;
-    top: 70rpx;
+    top: 85rpx;
     left: 0;
     margin: 0 auto;
     background: rgba(0,0,0,0);

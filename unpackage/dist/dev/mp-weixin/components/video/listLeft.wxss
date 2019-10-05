@@ -1,51 +1,51 @@
-
-.list-left.data-v-19f049d4{
-        width: 70%;
-        height: 120px;
-        color: white;
+.list-left.data-v-19f049d4 {
+  width: 70%;
+  height: 240rpx;
+  color: white;
+  margin-bottom: 60rpx;
 }
 .author.data-v-19f049d4 {
-        height: 35px;
-        line-height: 35px;
-        font-size: 17px;
+  height: 66rpx;
+  line-height: 66rpx;
+  font-size: 36rpx;
 }
 .title.data-v-19f049d4 {
-        width: 100%;
-        line-height: 25px;
-        font-size: 12px;
-        word-wrap: break-word;
-        color: #FFFAF0;
+  width: 100%;
+  line-height: 66rpx;
+  font-size: 32rpx;
+  word-wrap: break-word;
+  color: #FFFAF0;
 }
 .music-box.data-v-19f049d4 {
-        overflow: hidden; 
-        width: 70%;
+  overflow: hidden;
+  width: 70%;
 }
 .music.data-v-19f049d4 {
-        width: 200%;
-        height: 35px;
-        line-height: 35px;
-        font-size: 12px;
-        -webkit-animation: scroll-x-data-v-19f049d4 5s linear 0.2s infinite;
-                animation: scroll-x-data-v-19f049d4 5s linear 0.2s infinite;
+  width: 500rpx;
+  height: 66rpx;
+  line-height: 66rpx;
+  font-size: 24rpx;
+  -webkit-animation: scroll-x-data-v-19f049d4 8s linear 0.2s infinite;
+          animation: scroll-x-data-v-19f049d4 8s linear 0.2s infinite;
 }
-@-webkit-keyframes scroll-x-data-v-19f049d4{
+@-webkit-keyframes scroll-x-data-v-19f049d4 {
 0% {
-            -webkit-transform: translate3d(80%, 0, 0);
-                    transform: translate3d(80%, 0, 0);
+    -webkit-transform: translate3d(60%, 0, 0);
+            transform: translate3d(60%, 0, 0);
 }
 100% {
-            -webkit-transform: translate3d(-80%, 0, 0);
-                    transform: translate3d(-80%, 0, 0);
+    -webkit-transform: translate3d(-60%, 0, 0);
+            transform: translate3d(-60%, 0, 0);
 }
 }
-@keyframes scroll-x-data-v-19f049d4{
+@keyframes scroll-x-data-v-19f049d4 {
 0% {
-            -webkit-transform: translate3d(80%, 0, 0);
-                    transform: translate3d(80%, 0, 0);
+    -webkit-transform: translate3d(60%, 0, 0);
+            transform: translate3d(60%, 0, 0);
 }
 100% {
-            -webkit-transform: translate3d(-80%, 0, 0);
-                    transform: translate3d(-80%, 0, 0);
+    -webkit-transform: translate3d(-60%, 0, 0);
+            transform: translate3d(-60%, 0, 0);
 }
 }
 

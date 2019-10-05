@@ -1,6 +1,7 @@
 .video-footer.data-v-23be71b5 {
   height: 100rpx;
   line-height: 100rpx;
+  margin-bottom: 10rpx;
   width: 100%;
   position: fixed;
   bottom: 0;

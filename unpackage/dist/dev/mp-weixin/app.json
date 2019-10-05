@@ -1,12 +1,12 @@
 {
   "pages": [
+    "pages/index/index",
+    "pages/login/login",
     "pages/video/video",
     "pages/search/search",
     "pages/search/result",
-    "pages/login/login",
     "pages/mine/mine",
     "pages/regist/regist",
-    "pages/index/index",
     "pages/upload/upload"
   ],
   "subPackages": [],
@@ -40,5 +40,6 @@
   "usingComponents": {
     "cu-custom": "/components/cu-custom/cu-custom",
     "yo-dialog": "/components/yo-dialog/yo-dialog"
-  }
+  },
+  "sitemapLocation": "sitemap59.json"
 }

@@ -185,7 +185,7 @@
 					'isSaveRecord': 1,
 					'searchContent': key
 				}
-				uni.navigateTo({
+				uni.redirectTo({
 					url:"../../pages/search/result"
 				})
 			},

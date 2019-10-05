@@ -44,6 +44,8 @@
 			this.setTabBarIndex(0)
 			this.getAllVideoList(this.page)
 		},
+		onHide() {
+		},
 		// 上拉刷新
 		onReachBottom() {
 			// 判断当前页数和总页数是否相等
@@ -60,7 +62,6 @@
 			let searchInfo = getApp().globalData.searchInfo
 			this.searchContent = searchInfo.searchContent ? searchInfo.searchContent : ''
 			this.isSaveRecord = searchInfo.isSaveRecord
-			console.log(searchInfo);
 			if (this.isSaveRecord === null || this.isSaveRecord === '' || this.isSaveRecord === undefined) {
 				this.isSaveRecord = 0
 			}
@@ -71,7 +72,7 @@
 			},
 			getAllVideoList(page) {
 				uni.request({
-					url: this.baseUrl + '/video/showAll?page=' + page + '&isSaveRecord=' + this.isSaveRecord,
+					url: this.baseUrl + '/video/showVideos?page=' + page + '&isSaveRecord=' + this.isSaveRecord,
 					method: "POST",
 					data: {
 						'videoDesc': this.searchContent
@@ -89,8 +90,12 @@
 								this.isNoMore = true
 							}
 							this.videoList = this.videoList.concat(data.rows)
+							getApp().globalData.videoList = this.videoList
 							this.page = data.page
 							this.totalPage = data.total
+							if (this.page === this.totalPage) {
+								this.isNoMore = true
+							}
 						}
 					}
 				})

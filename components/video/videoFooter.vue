@@ -33,14 +33,29 @@
 				})
 			},
 			toUploadPage() {
-				uni.navigateTo({
-					url:'../../pages/upload/upload'
-				})
+				// 页面重定向： 如果未登录，则跳转登录页面
+				let user = getApp().globalData.getGlobalUserInfo
+				if (user === null || user === undefined || user === '') {
+					wx.reLaunch({
+						url:'../../pages/login/login'
+					})
+				} else {
+					uni.navigateTo({
+						url:'../../pages/upload/upload'
+					})
+				}
 			},
 			toMinePage() {
-				uni.switchTab({
-					url:'../../pages/mine/mine'
-				})
+				let user = getApp().globalData.getGlobalUserInfo
+				if (user === null || user === undefined || user === '') {
+					wx.reLaunch({
+						url:'../../pages/login/login'
+					})
+				} else {
+					uni.switchTab({
+						url:'../../pages/mine/mine'
+					})
+				}
 			},
 		}
 	}
@@ -50,6 +65,7 @@
 	.video-footer {
 	    height: 100rpx;
 	    line-height: 100rpx;
+		margin-bottom: 10rpx;
 	    width: 100%;
 	    position: fixed;
 	    bottom: 0;

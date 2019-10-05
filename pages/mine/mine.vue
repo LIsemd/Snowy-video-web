@@ -186,16 +186,39 @@
 			// 修改为获取本地缓存
 			// let user = getApp().globalData.userInfo
 			let user = getApp().globalData.getGlobalUserInfo()
-			uni.showLoading({
-				title: '页面加载中...'
-			})
+			console.log(user.userToken);
+			// 判断token是否过期
+			if (user.userToken === null) {
+				let time = 3
+				let interval = setInterval(() => {
+					uni.showToast({
+						title: "当前登录信息已过期\r\n" + time + "秒后将跳转到登录页面",
+						icon:"none",
+						duration:1000
+					})
+					time--
+				},1000)
+									
+				setTimeout(() => {
+					clearInterval(interval)
+					uni.reLaunch({
+						url:'../login/login'
+					})
+				},3500)	
+				return
+			}
 			uni.request({
 				url: getApp().globalData.baseUrl + '/user/query?userId=' + user.id,
 				method: "POST",
+				header:{
+					'content-type': 'application/json',
+					'userId': user.id,
+					'userToken': user.userToken
+				},
 				success: (res) => {
-					uni.hideLoading()
 					if (res.data.status === 200) {
 						let data = res.data.data
+						data.userToken = user.userToken
 						getApp().globalData.setGlobalUserInfo(data)
 						if (data.avatar != null && data.avatar != '' && data.avatar != undefined) {
 							this.avatarUrl = getApp().globalData.baseUrl + data.avatar
@@ -222,6 +245,23 @@
 								class: 'cuIcon-female bg-pink'
 							}
 						}
+					} else if (res.data.status === 502) {
+						let time = 3
+						let interval = setInterval(() => {
+							uni.showToast({
+								title: res.data.msg + "\r\n" + time + "秒后将跳转到登录页面",
+								icon:"none",
+								duration:1000
+							})
+							time--
+						},1000)
+					
+						setTimeout(() => {
+							clearInterval(interval)
+							uni.reLaunch({
+								url:'../login/login'
+							})
+						},3500)	
 					}
 				}
 			})
@@ -304,7 +344,9 @@
 							filePath: tempFilePaths[0],
 							name: 'file',
 							header: {
-								'content-type': 'application/json'
+								'content-type': 'application/json',
+								'userId': user.id,
+								'userToken': user.userToken
 							},
 							success: (res) => {
 								uni.hideLoading()
@@ -354,7 +396,13 @@
 					url: this.baseUrl + api + user.id,
 					method: "POST",
 					data: tempInfo,
+					header:{
+						'content-type': 'application/json',
+						'userId': user.id,
+						'userToken': user.userToken
+					},
 					success: (res) => {
+						console.log(res);
 						if (res.data.status === 200) {
 							uni.showToast({
 								title: successText,
@@ -369,6 +417,8 @@
 								duration: 2000
 							})
 						}
+					},fail: (err) => {
+						console.log(err);
 					}
 				})
 			},

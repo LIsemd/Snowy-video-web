@@ -198,9 +198,9 @@
 						this.tempHeight = res.height
 						this.tempWidth = res.width
 						this.tempVideoUrl = res.tempFilePath
-						if (res.duration > 21) {
+						if (res.duration > 61) {
 							uni.showToast({
-								title: '视频长度不能超过20秒',
+								title: '视频长度不能超过60秒',
 								icon: 'none',
 								duration: 2000
 							})
