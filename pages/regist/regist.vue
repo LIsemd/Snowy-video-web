@@ -69,7 +69,6 @@
 						password: this.password
 					},
 					success: (res) => {
-						console.log(res.data);
 						let status = res.data.status
 						if (status === 200) {
 							uni.showToast({
@@ -78,8 +77,8 @@
 								duration: 2000
 							})
 							getApp().globalData.setGlobalUserInfo(res.data.data)
-							uni.redirectTo({
-								url:'../index/index'
+							uni.switchTab({
+								url: '../index/index'
 							})
 						} else if (status === 500) {
 							uni.showToast({

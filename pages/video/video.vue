@@ -16,10 +16,6 @@
 			videoHeader,
 			videoFooter
 		},
-		data() {
-			return {
-			}
-		},
 	}
 </script>
 

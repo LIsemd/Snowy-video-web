@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "video-item": "/components/videoList/videoItem",
+    "video-header": "/components/video/videoHeader",
+    "video-footer": "/components/video/videoFooter"
+  }
+}

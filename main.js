@@ -2,10 +2,10 @@ import Vue from 'vue'
 import App from './App'
 
 import cuCustom from './components/cu-custom/cu-custom.vue'
-import yoDialog from './components/yo-dialog/yo-dialog.vue'
+import cuDialog from './components/cu-dialog/cu-dialog.vue'
 
 Vue.component('cu-custom', cuCustom)
-Vue.component('yo-dialog', yoDialog)
+Vue.component('cu-dialog', cuDialog)
 
 Vue.config.productionTip = false
 

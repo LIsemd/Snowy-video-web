@@ -28,12 +28,11 @@
 				id: ''
 			}
 		},
-		props: ['index','videoList'],
+		props: ['video'],
 		mounted() {
-			let info = this.videoList[this.index];
-			this.id = info.audioId
-			this.nickname = info.nickname
-			this.videoDesc = info.videoDesc
+			this.id = this.video.audioId
+			this.nickname = this.video.nickname
+			this.videoDesc = this.video.videoDesc
 			if (this.id != '') {
 				uni.request({
 					url: getApp().globalData.baseUrl + '/bgm/getBgmInfo?id=' + this.id,

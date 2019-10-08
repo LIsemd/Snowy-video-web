@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "list-item": "/components/videoList/listItem"
+  },
+  "component": true
+}

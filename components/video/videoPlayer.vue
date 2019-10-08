@@ -1,7 +1,7 @@
 <template>
 	<view class="video-player" @click="doClick">
 		<video  class="video" id="myVideo" :src="videoPath" :controls="false" :objectFit="cover" @ended="toNextVideo"
-					:show-center-play-btn="false">
+					:show-center-play-btn="false" :loop="isLoop">
 		</video>
 	</view>
 </template>
@@ -19,19 +19,19 @@
 				videoContext: '',
 			}
 		},
-		props: ["currentPage", "index","videoList"],
+		props: ["currentPage", "index","video","isLoop"],
 		created() {
 			this.videoContext = uni.createVideoContext("myVideo", this);
 		},
 		mounted() {
-			let video = this.videoList[this.index]
+			let video = this.video
 			this.videoPath = this.baseUrl + video.videoPath
-			// console.log("index=" + this.index + "-----------video="+video.videoWidth);
 			// 横向视频进行自适应
 			if (video.videoWidth >= video.videoHeight) {
 				this.cover = ""
 			}
 			// 进入页面后开启自动播放
+			
 			if (this.index === this.currentPage) {
 				setTimeout(() => {
 					this.play();

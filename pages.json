@@ -1,17 +1,31 @@
 {
-	"pages": [
-		{
+	"pages": [{
+			"path": "pages/login/login",
+			"style": {}
+		}, {
 			"path": "pages/index/index",
 			"style": {
 				"enablePullDownRefresh": true
 			}
-		},{
-			"path": "pages/login/login",
+		},
+		{
+			"path": "pages/person/person",
 			"style": {}
 		},
-
+		{
+			"path": "pages/message/message",
+			"style": {}
+		},
+		{
+			"path": "pages/dynamic/dynamic",
+			"style": {}
+		},
 		{
 			"path": "pages/video/video",
+			"style": {}
+		},
+		{
+			"path": "pages/video/videoSingle",
 			"style": {}
 		},
 		{
@@ -45,6 +59,18 @@
 				"iconPath": "static/images/home.png",
 				"selectedIconPath": "static/images/home_actived.png",
 				"text": "首页"
+			},
+			{
+				"pagePath": "pages/dynamic/dynamic",
+				"iconPath": "static/images/dynamic.png",
+				"selectedIconPath": "static/images/dynamic_actived.png",
+				"text": "动态"
+			},
+			{
+				"pagePath": "pages/message/message",
+				"iconPath": "static/images/message.png",
+				"selectedIconPath": "static/images/message_actived.png",
+				"text": "消息"
 			},
 			{
 				"pagePath": "pages/mine/mine",

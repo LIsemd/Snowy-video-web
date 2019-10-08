@@ -1,8 +1,12 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/login/login",
+    "pages/index/index",
+    "pages/person/person",
+    "pages/message/message",
+    "pages/dynamic/dynamic",
     "pages/video/video",
+    "pages/video/videoSingle",
     "pages/search/search",
     "pages/search/result",
     "pages/mine/mine",
@@ -30,6 +34,18 @@
         "text": "首页"
       },
       {
+        "pagePath": "pages/dynamic/dynamic",
+        "iconPath": "static/images/dynamic.png",
+        "selectedIconPath": "static/images/dynamic_actived.png",
+        "text": "动态"
+      },
+      {
+        "pagePath": "pages/message/message",
+        "iconPath": "static/images/message.png",
+        "selectedIconPath": "static/images/message_actived.png",
+        "text": "消息"
+      },
+      {
         "pagePath": "pages/mine/mine",
         "iconPath": "static/images/mine.png",
         "selectedIconPath": "static/images/mine_actived.png",
@@ -39,7 +55,6 @@
   },
   "usingComponents": {
     "cu-custom": "/components/cu-custom/cu-custom",
-    "yo-dialog": "/components/yo-dialog/yo-dialog"
-  },
-  "sitemapLocation": "sitemap59.json"
+    "cu-dialog": "/components/cu-dialog/cu-dialog"
+  }
 }

@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<scroll-view :class="{show: isEdit}" class="DrawerPage">
+		<scroll-view :class="{show: isEdit}" class="DrawerPage" scroll-y>
 			<view class="header">
 				<view class="header-mask"></view>
 				<image :src="backgroundImage" class="header-background"></image>
@@ -12,7 +12,6 @@
 					<text class="cuIcon-settings margin-right-sm"></text>
 					编 辑
 				</button>
-				<!-- <button class="cu-btn round attentionBtn text-white">关注我 / 已关注</button> -->
 				<view class="user-info">
 					<block v-for="item in userInfo" :key="index">
 						<view class="cu-capsule radius">
@@ -24,8 +23,19 @@
 					</block>
 				</view>
 			</view>
+			<scroll-view scroll-x class="bg-white nav">
+				<view class="flex text-center">
+					<view class="cu-item flex-sub" v-for="(item,index) in tabList" :class="index==tabCur?'text-pink current':''" :key="index" @click="tabSelect" :data-id="index">
+						{{item}}
+					</view>
+				</view>
+			</scroll-view>
+			<contribute-list v-if="tabCur === 0" :userId="userId" style="margin-bottom: 140rpx;" ></contribute-list>
+			<like-list v-else :userId="userId" style="margin-bottom: 140rpx;" ></like-list>
+			<!-- 用来撑开被 tabbar 遮挡的地方 -->
+			<view style="height: 120rpx;"></view>
 		</scroll-view>
-		<view :class="{show: isAvatarEdit}" class="DrawerClose" @click="handleEdit">
+		<view :class="{show: isAvatarEdit}" class="DrawerClose" @click="handleEdit" >
 			<text class="cuIcon-pullright"></text>
 		</view>
 		<scroll-view :class="{show: isAvatarEdit}" class="DrawerWindow drawer-window jonquil" scroll-y>
@@ -98,14 +108,14 @@
 				<view class="logout-btn" @click="openLogoutCheck">退出登录</view>
 			</view>
 		</scroll-view>
-		<yo-dialog :isShow="isLogoutCheck">
+		<cu-dialog :isShow="isLogoutCheck">
 			<block slot="content">乃确定不是手滑了么？</block>
 			<block slot="button">
 				<button class="cu-btn bg-white text-pink no-border" @click="closeDialog">我手滑了</button>
 				<button class="cu-btn bg-white text-pink margin-left no-border" @click="handleLogout">注销</button>
 			</block>
-		</yo-dialog>
-		<yo-dialog :isShow="isChangeNickName">
+		</cu-dialog>
+		<cu-dialog :isShow="isChangeNickName">
 			<block slot="content">
 				<view class="title margin-bottom-xl">修改昵称</view>
 				<input name="input" class="change-Input" v-model="tempNickName" placeholder="不超过10个字" />
@@ -114,8 +124,8 @@
 				<button class="cu-btn bg-white text-pink no-border" @click="closeChangeNickName">取消</button>
 				<button class="cu-btn bg-white text-pink margin-left no-border" @click="changeNickName">修改</button>
 			</block>
-		</yo-dialog>
-		<yo-dialog :isShow="isChangeGender">
+		</cu-dialog>
+		<cu-dialog :isShow="isChangeGender">
 			<block slot="content">
 				<view class="title margin-bottom-xl">修改性别</view>
 				<switch class="switch-sex" :checked="tempSex" @change="changeSex"></switch>
@@ -124,8 +134,8 @@
 				<button class="cu-btn bg-white text-pink no-border" @click="closeChangeGender">取消</button>
 				<button class="cu-btn bg-white text-pink margin-left no-border" @click="changeGender">修改</button>
 			</block>
-		</yo-dialog>
-		<yo-dialog :isShow="isChangeSignature">
+		</cu-dialog>
+		<cu-dialog :isShow="isChangeSignature">
 			<block slot="content">
 				<view class="title margin-bottom-xl">修改签名</view>
 				<input name="input" class="change-Input" v-model="tempSignature" placeholder="不超过15个字" />
@@ -134,22 +144,30 @@
 				<button class="cu-btn bg-white text-pink no-border" @click="closeChangeSignature">取消</button>
 				<button class="cu-btn bg-white text-pink margin-left no-border" @click="changeSignature">修改</button>
 			</block>
-		</yo-dialog>
+		</cu-dialog>
 	</view>
 </template>
 
 <script>
+	import contributeList from '../../components/videoList/contributeList.vue'
+	import likeList from '../../components/videoList/likeList.vue'
 	export default {
+		components:{
+			contributeList,
+			likeList
+		},
 		data() {
 			return {
 				// 服务器地址
 				baseUrl: getApp().globalData.baseUrl,
+				tabCur: 0,
 				// 用户默认属性
 				avatarUrl: '/static/images/avatar.jpg',
 				backgroundImage: '',
 				uid: '',
 				nickname: '',
 				signature: '',
+				userId: '',
 				gender: {
 					type: '保密',
 					class: 'cuIcon-github'
@@ -170,6 +188,7 @@
 						value: 0
 					}
 				],
+				tabList: ['投稿', '喜欢'],
 				// 临时变量
 				tempNickName: '',
 				tempSignature: '',
@@ -186,7 +205,6 @@
 			// 修改为获取本地缓存
 			// let user = getApp().globalData.userInfo
 			let user = getApp().globalData.getGlobalUserInfo()
-			console.log(user.userToken);
 			// 判断token是否过期
 			if (user.userToken === null) {
 				let time = 3
@@ -231,6 +249,7 @@
 						this.userInfo[0].value = data.fansCounts
 						this.userInfo[1].value = data.followCounts
 						this.userInfo[2].value = data.receiveLikeCounts
+						this.userId = data.id
 						this.uid = data.id.toString().slice(0, 8)
 						if (data.gender === 1) {
 							this.tempSex = true
@@ -268,9 +287,13 @@
 		},
 		onShow() {
 			this.isAvatarEdit = false
-			this.setTabBarIndex(2)
+			this.setTabBarIndex(4)
 		},
 		methods: {
+			tabSelect(e) {
+				this.tabCur = e.currentTarget.dataset.id;
+				this.scrollLeft = (e.currentTarget.dataset.id - 1) * 60
+			},
 			// dialog 开关
 			changeSex() {
 				this.tempSex = !this.tempSex
@@ -402,7 +425,6 @@
 						'userToken': user.userToken
 					},
 					success: (res) => {
-						console.log(res);
 						if (res.data.status === 200) {
 							uni.showToast({
 								title: successText,
@@ -417,8 +439,6 @@
 								duration: 2000
 							})
 						}
-					},fail: (err) => {
-						console.log(err);
 					}
 				})
 			},
@@ -476,7 +496,6 @@
 <style lang="scss">
 	@import "../../static/styles/drawer.css";
 	@import '../../static/styles/gradientColor.css';
-
 	.header {
 		position: relative;
 		width: 100%;
@@ -534,7 +553,10 @@
 			}
 		}
 	}
-
+	.current {
+		border-bottom: 1px solid;
+		transition: .5s ease-in;
+	}
 	.drawer-window {
 		.logout-btn {
 			position: absolute;

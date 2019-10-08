@@ -4,14 +4,14 @@
 			<swiper class="swiper" :vertical="true" @change="slider" :current="currentPage">
 				<swiper-item v-for="(item,index) in videoList" :key="index">
 					<view class="swiper-item">
-						<video-player :video="item" :videoList="videoList" :currentPage="currentPage" :index="index" @toNextVideo="toNextVideo" ref="players"
-						 @follow="follow" @pauseAnimate="pauseAnimate" @playAnimate="playAnimate">
+						<video-player :video="item" :currentPage="currentPage" :index="index" @toNextVideo="toNextVideo" ref="players"
+						 @follow="follow" @pauseAnimate="pauseAnimate" @playAnimate="playAnimate" :isLoop="false">
 						</video-player>
 						<view class="left-box">
-							<list-left :index="index" :videoList="videoList"></list-left>
+							<list-left :video="item"></list-left>
 						</view>
 						<view class="right-box">
-							<list-right ref="listRight" :index="index" :videoList="videoList"></list-right>
+							<list-right ref="listRight" :video="item"></list-right>
 						</view>
 					</view>
 				</swiper-item>
