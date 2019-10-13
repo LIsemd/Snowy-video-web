@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "contribute-list": "/components/videoList/contributeList",
-    "like-list": "/components/videoList/likeList"
+    "like-list": "/components/videoList/likeList",
+    "drawer-left": "/components/drawer/drawerLeft"
   }
 }

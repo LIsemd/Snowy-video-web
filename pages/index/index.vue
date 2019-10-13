@@ -82,7 +82,7 @@
 								getApp().globalData.page = data.page
 							}
 							getApp().globalData.totalPage = data.total
-							if (data.page === data.total) {
+							if (data.page === data.total || this.videoList.length === 0) {
 								this.isNoMore = true
 							}
 						}

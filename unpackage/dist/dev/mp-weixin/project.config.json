@@ -8,7 +8,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.7.0",
-	"appid": "touristappid",
+	"appid": "wxbef33f8ff3f907ac",
 	"projectname": "Snowy-video",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
@@ -21,15 +21,7 @@
 			"current": -1,
 			"list": []
 		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
 		"game": {
-			"current": -1,
-			"list": []
-		},
-		"gamePlugin": {
 			"current": -1,
 			"list": []
 		},
@@ -37,17 +29,10 @@
 			"current": 0,
 			"list": [
 				{
-					"id": -1,
-					"name": "pages/mine/mine",
-					"pathName": "pages/mine/mine",
+					"name": "",
+					"path": "",
 					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/person/person",
-					"pathName": "pages/person/person",
-					"scene": null
+					"id": 0
 				}
 			]
 		}

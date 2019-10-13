@@ -3,10 +3,10 @@
 		<block v-for="item in videoList" :key="item.id">
 			<list-item :video="item">
 				<block slot="image">
-					<image :src="baseUrl + item.coverPath" mode="" class="image"></image>
+					<view class="image" :style="{'background-image':'url(' + baseUrl + item.coverPath + ')'}"></view>
 				</block>
 				<block slot="seconds">
-					{{Math.ceil(item.videoSeconds)}} s
+					{{Math.floor(item.videoSeconds / 60)}}:{{Math.floor(item.videoSeconds % 60) < 10 ? '0' + Math.floor(item.videoSeconds % 60) : Math.floor(item.videoSeconds % 60)}}
 				</block>
 				<block slot="title">
 					{{item.videoDesc ? item.videoDesc : '无标题'}}
@@ -78,33 +78,6 @@
 	}
 </script>
 
-<style lang="scss" scoped>
-	.image {
-		height: 170rpx;
-		border-radius: 10rpx;
-	}
-	.container {
-		height: auto;
-		width: 94%;
-		text-align: center;
-		display: flex;
-		flex-direction: row;
-		margin: 100rpx auto 0;
-		padding: 100rpx 0;
-		box-shadow: 2px 2px 5px #e0e0e0;
-		background-color: #FFF;
-	
-		.image {
-			width: 300rpx;
-			height: 300rpx;
-		}
-	
-		.content {
-			display: inline-block;
-			height: 300rpx;
-			padding-top: 100rpx;
-			font-size: 44rpx;
-			flex: 1;
-		}
-	}
+<style lang="scss">
+	@import '../../static/styles/listItem.scss'
 </style>

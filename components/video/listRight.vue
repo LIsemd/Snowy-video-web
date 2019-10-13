@@ -8,19 +8,18 @@
 			</view>
 		</view>
 		<view class="right-box">
-			<view class="icon cuIcon-likefill" :class="{fav: isFav}" @click="changeColor"></view>
+			<view class="icon cuIcon-likefill" :class="{fav: isFav}" @click="handleFollow"></view>
 			<view class="count">{{videoInfo.likeCounts}}</view>
 		</view>
 		<view class="right-box">
-			<view class="icon cuIcon-commentfill"></view>
-			<view class="count">0</view>
+			<view class="icon cuIcon-commentfill" @click="handleComment"></view>
+			<view class="count">{{commentsLength}}</view>
 		</view>
 		<view class="right-box">
-			<view class="icon cuIcon-forwardfill"></view>
-			<view class="count">0</view>
+			<view class="icon cuIcon-forwardfill" @click="handleForward"></view>
 		</view>
 		<view class="music-img" :class="{'pauseAnimate': isPauseAnimate}">
-			<image class="img" src="../../static/images/avatar2.jpg" />
+			<image class="img" src="../../static/images/music.png" />
 		</view>
 	</view>
 </template>
@@ -33,31 +32,81 @@
 				isFollow: false,
 				isFav: false,
 				isPauseAnimate: true,
+				isForward: false,
 				videoInfo: '',
 				avatar: '',
-				userInfo: getApp().globalData.getGlobalUserInfo()
+				userInfo: getApp().globalData.getGlobalUserInfo(),
+				clickLoading: false,
+				commentsLength: 0
 			}
 		},
 		mounted() {
 			this.videoInfo = this.video
 			this.avatar = this.baseUrl + this.video.avatar
-			uni.request({
-				url: this.baseUrl + '/user/queryUserLike?userId=' + this.userInfo.id + '&videoId=' + this.video.id,
-				method: 'POST',
-				header: {
-					'content-type': 'application/json',
-					'userId': this.userInfo.id,
-					'userToken': this.userInfo.userToken
-				},
-				success: (res) => {
-					if (res.data.status === 200) {
-						this.isFav = res.data.data
-					}
-				}
-			})
+			this.getFav()
+			this.getAllComments()
 		},
 		props: ['index', 'video'],
 		methods: {
+			// 获取点赞信息
+			getFav() {
+				uni.request({
+					url: this.baseUrl + '/user/queryUserLike?userId=' + this.userInfo.id + '&videoId=' + this.video.id,
+					method: 'POST',
+					header: {
+						'content-type': 'application/json',
+						'userId': this.userInfo.id,
+						'userToken': this.userInfo.userToken
+					},
+					success: (res) => {
+						if (res.data.status === 200) {
+							this.isFav = res.data.data
+						}
+					}
+				})
+			},
+			// 获取评论数量
+			getAllComments() {
+				uni.request({
+					url: this.baseUrl + '/video/getVideoComments?videoId=' + this.video.id,
+					method: 'POST',
+					header: {
+						'content-type': 'application/json',
+						'userId': this.userInfo.id,
+						'userToken': this.userInfo.userToken
+					},
+					success: (res) => {
+						if (res.data.status === 200) {
+							this.commentsLength = res.data.data.length
+						}
+					}
+				})
+			},
+			// 打开评论界面
+			handleComment() {
+				uni.navigateTo({
+					url: '../../pages/comment/comment?videoId=' + this.video.id + '&createrId=' + this.video.userId + '&videoDesc=' + this.video.videoDesc
+				})
+			},
+			// 打开分享与举报
+			handleForward() {
+				uni.showActionSheet({
+					itemList: ['分享到朋友圈', '分享到QQ空间', '分享到微博', '举报用户'],
+					success: (res) => {
+						if (res.tapIndex === 3) {
+							uni.navigateTo({
+								url: '../../pages/report/report?dealUserId=' + this.video.userId + '&dealVideoId=' + this.video.id
+							})
+						} else {
+							uni.showToast({
+								title: '分享功能正在施工中...',
+								icon: 'none',
+								duration: 1500
+							})
+						}
+					}
+				})
+			},
 			// 跳转到作者个人界面
 			toCreaterPage() {
 				uni.navigateTo({
@@ -65,7 +114,15 @@
 				})
 			},
 			// 点赞与取消点赞
-			changeColor() {
+			handleFollow() {
+				if (this.clickLoading) {
+					uni.showToast({
+						title: "点击过于频繁 ~",
+						icon: "none",
+						duration: 1000
+					})
+					return
+				}
 				if (this.userInfo === null || this.userInfo === undefined || this.userInfo === '') {
 					uni.showToast({
 						title: "登录后才可以点赞噢 \r\n ∠( ᐛ 」∠)＿",
@@ -74,6 +131,7 @@
 					})
 					return
 				}
+				this.clickLoading = true
 				let userId = this.userInfo.id
 				let videoId = this.video.id
 				let videoCreaterId = this.video.userId
@@ -92,6 +150,7 @@
 						'userToken': this.userInfo.userToken
 					},
 					success: (res) => {
+						this.clickLoading = false
 						if (res.data.status === 200) {
 							this.isFav = !this.isFav;
 							if (this.isFav) {
@@ -112,12 +171,17 @@
 								}
 							}
 						}
+					},
+					fail: () => {
+						this.clickLoading = false
 					}
 				})
 			},
+			// 旋转动画暂停
 			pauseAnimate() {
 				this.isPauseAnimate = true
 			},
+			// 旋转动画开启
 			playAnimate() {
 				this.isPauseAnimate = false
 			}
@@ -128,7 +192,7 @@
 <style lang="scss" scoped>
 	.list-right {
 		width: 120rpx;
-		margin-right: 20rpx;
+		margin-right: 10rpx;
 
 		.author-img {
 			position: relative;
@@ -178,13 +242,15 @@
 			height: 120rpx;
 			text-align: center;
 			margin-top: 40rpx;
-			animation: around 2.5s linear .2s infinite;
+			animation: around 3.5s linear .2s infinite;
 
 			.img {
 				width: 120rpx;
 				height: 120rpx;
 				border-radius: 50%;
-				border: 2px solid #FFFFFF;
+				background: #F1F1F1;
+				opacity: .8;
+				border: 2px solid #F1F1F1;
 			}
 		}
 

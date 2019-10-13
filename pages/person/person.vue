@@ -3,20 +3,22 @@
 		<scroll-view :class="{show: isEdit}" class="DrawerPage" scroll-y>
 			<view class="header">
 				<view class="header-mask"></view>
-				<cover-view class="back-icon cuIcon-back" @click="handleBack"></cover-view>
+				<Text class="back-icon cuIcon-back" @click="handleBack"></Text>
 				<image :src="backgroundImage" class="header-background"></image>
 				<view class="cu-avatar round user-avatar" @click="handleEdit">
 					<image :src="avatarUrl" style="width: 100%; height: 100%;" class="round"></image>
 					<view class="cu-tag badge" :class="[gender.class]"></view>
 				</view>
-				<button class="cu-btn round attentionBtn text-white" :class="{'bg-gradual-green': isFollow}"
-				 :disabled="isMe" @click="handleFollow">
-					<text class="margin-right-sm" :class="isFollow ? 'cuIcon-likefill' :'cuIcon-like'"></text>
+				<button class="cu-btn round nickname text-white" @click="handleEdit">
+					{{nickname}}
+				</button>
+				<button class="cu-btn round attentionBtn text-white" :class="{'bg-gradual-green': isFollow}" v-if="!isMe" @click="handleFollow">
+					<text class="margin-bottom-sm" :class="isFollow ? 'cuIcon-likefill' :'cuIcon-like'"></text>
 					{{isFollow ? '已关注' : '关 注'}}
 				</button>
 				<view class="user-info">
 					<block v-for="item in userInfo" :key="index">
-						<view class="cu-capsule radius">
+						<view class="cu-capsule radius" @click="toFriendList">
 							<view class="cu-tag tag-title" :class="item.color">
 								{{item.title}}
 							</view>
@@ -27,85 +29,31 @@
 			</view>
 			<scroll-view scroll-x class="bg-white nav">
 				<view class="flex text-center">
-					<view class="cu-item flex-sub" v-for="(item,index) in tabList" :class="index==tabCur?'text-pink current':''" :key="index" @click="tabSelect" :data-id="index">
+					<view class="cu-item flex-sub" v-for="(item,index) in tabList" :class="index==tabCur?'text-blue current':''" :key="index"
+					 @click="tabSelect" :data-id="index">
 						{{item}}
 					</view>
 				</view>
 			</scroll-view>
-			<contribute-list v-if="tabCur === 0" :userId="createrId" style="margin-bottom: 140rpx;" ></contribute-list>
-			<like-list v-else :userId="createrId" style="margin-bottom: 140rpx;" ></like-list>
+			<contribute-list v-if="tabCur === 0" :userId="createrId" style="margin-bottom: 140rpx;"></contribute-list>
+			<like-list v-else :userId="createrId" style="margin-bottom: 140rpx;"></like-list>
 		</scroll-view>
 		<view :class="{show: isAvatarEdit}" class="DrawerClose" @click="handleEdit">
 			<text class="cuIcon-pullright"></text>
 		</view>
-		<scroll-view :class="{show: isAvatarEdit}" class="DrawerWindow drawer-window jonquil" scroll-y>
-			<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
-				<view class="cu-item arrow item-background">
-					<view class="content">
-						<text class="cuIcon-github text-grey"></text>
-						<text class="text-grey">头像</text>
-					</view>
-					<view class="cu-avatar lg round action">
-						<image :src="avatarUrl" style="width: 100%; height: 100%;" class="round"></image>
-					</view>
-				</view>
-				<view class="cu-item arrow item-background margin-top-sm">
-					<view class="content">
-						<text class="cuIcon-clothes text-grey"></text>
-						<text class="text-grey">背景</text>
-					</view>
-					<view class="cu-avatar lg round action" style="background: #E1D7F0;">
-						<image :src="backgroundImage" style="width: 100%; height: 100%;" class="round"></image>
-					</view>
-				</view>
-				<view class="cu-item arrow item-background margin-top-sm">
-					<view class="content">
-						<text class="cuIcon-expressman text-grey"></text>
-						<text class="text-grey">昵称</text>
-					</view>
-					<view class="action text-grey">
-						{{nickname}}
-					</view>
-				</view>
-				<view class="cu-item arrow item-background margin-top-sm">
-					<view class="content">
-						<text class="cuIcon-ticket text-grey"></text>
-						<text class="text-grey">UID</text>
-					</view>
-					<view class="action text-grey">
-						{{uid}}
-					</view>
-				</view>
-				<view class="cu-item arrow item-background margin-top-sm">
-					<view class="content">
-						<text class="text-white round" :class="[gender.class]"></text>
-						<text class="text-grey">性别</text>
-					</view>
-					<view class="action text-grey">
-						{{gender.type}}
-					</view>
-				</view>
-				<view class="cu-item arrow item-background margin-top-sm">
-					<view class="content">
-						<text class="cuIcon-post text-grey"></text>
-						<text class="text-grey">个性签名</text>
-					</view>
-					<view class="action text-grey">
-						{{signature}}
-					</view>
-				</view>
-			</view>
-		</scroll-view>
+		<drawer-left :isAvatarEdit="isAvatarEdit" :userData="userData" :isMe="false" @handleEdit="handleEdit"></drawer-left>
 	</view>
 </template>
 
 <script>
 	import contributeList from '../../components/videoList/contributeList.vue'
 	import likeList from '../../components/videoList/likeList.vue'
+	import drawerLeft from '../../components/drawer/drawerLeft.vue'
 	export default {
-		components:{
+		components: {
 			contributeList,
-			likeList
+			likeList,
+			drawerLeft
 		},
 		data() {
 			return {
@@ -114,9 +62,8 @@
 				// 用户默认属性
 				avatarUrl: '/static/images/avatar.jpg',
 				backgroundImage: '',
-				uid: '',
 				nickname: '',
-				signature: '',
+				userData: {},
 				gender: {
 					type: '保密',
 					class: 'cuIcon-github'
@@ -164,6 +111,7 @@
 				success: (res) => {
 					if (res.data.status === 200) {
 						let data = res.data.data
+						this.userData = data
 						if (data.avatar != null && data.avatar != '' && data.avatar != undefined) {
 							this.avatarUrl = baseUrl + data.avatar
 						}
@@ -171,14 +119,12 @@
 							this.backgroundImage = baseUrl + data.backgroundImage
 						}
 						this.nickname = data.nickname
-						this.signature = data.signature
 						this.userInfo[0].value = data.fansCounts
 						this.userInfo[1].value = data.followCounts
 						this.userInfo[2].value = data.receiveLikeCounts
 						if (!this.isMe) {
 							this.isFollow = data.follow;
 						}
-						this.uid = data.id.toString().slice(0, 8)
 						if (data.gender === 1) {
 							this.tempSex = true
 							this.gender = {
@@ -204,10 +150,12 @@
 				this.tabCur = e.currentTarget.dataset.id;
 				this.scrollLeft = (e.currentTarget.dataset.id - 1) * 60
 			},
-			// dialog 开关
-			changeSex() {
-				this.tempSex = !this.tempSex
+			toFriendList() {
+				uni.navigateTo({
+					url: '../friend/friend?userId=' + this.createrId
+				})
 			},
+			// dialog 开关
 			handleEdit() {
 				this.isAvatarEdit = !this.isAvatarEdit
 			},
@@ -231,20 +179,20 @@
 					success: (res) => {
 						if (res.data.status === 200) {
 							this.isFollow = !this.isFollow
-							if(this.isFollow) {
+							if (this.isFollow) {
 								uni.showToast({
-									title:'关注成功',
-									icon:'none',
-									duration:1200
+									title: '关注成功',
+									icon: 'none',
+									duration: 1200
 								})
-								this.userInfo[0].value ++
+								this.userInfo[0].value++
 							} else {
 								uni.showToast({
-									title:'取消关注',
-									icon:'none',
-									duration:1200
+									title: '取消关注',
+									icon: 'none',
+									duration: 1200
 								})
-								this.userInfo[0].value --
+								this.userInfo[0].value--
 							}
 						}
 					}
@@ -257,80 +205,26 @@
 <style lang="scss">
 	@import "../../static/styles/drawer.css";
 	@import '../../static/styles/gradientColor.css';
+	@import '../../static/styles/mine.scss';
 
-	.header {
-		position: relative;
-		width: 100%;
-		height: 450rpx;
-		text-align: center;
-		background: #E1D7F0;
-
-		.header-mask {
-			width: 100%;
-			height: 100%;
-			position: absolute;
-			background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 70%, rgba(0, 0, 0, .8) 100%);
-			z-index: 100;
-		}
-
-		.back-icon {
-			position: absolute;
-			top: 70rpx;
-			left: 40rpx;
-			font-size: 50rpx;
-			color: #F0F0F0;
-			z-index: 200;
-		}
-
-		.header-background {
-			position: absolute;
-			left: 0;
-			right: 0;
-			top: 0;
-			height: 100%;
-			width: 100%;
-		}
-
-		.user-avatar {
-			margin-top: 140rpx;
-			width: 160rpx;
-			height: 160rpx;
-			z-index: 200;
-		}
-
-		.attentionBtn {
-			position: absolute;
-			top: 70%;
-			left: 50%;
-			transform: translateX(-50%);
-			height: 50rpx;
-			width: auto;
-			background-color: rgba(0, 0, 0, 0.2);
-			border: 1px solid rgba(0, 0, 0, 0.1);
-			z-index: 200;
-		}
-
-		.user-info {
-			position: absolute;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			margin: 20rpx auto;
-			z-index: 200;
-
-			.tag-title {
-				background-color: rgba(255, 255, 255, 0.6);
-				margin-left: 20rpx;
-			}
-		}
+	.back-icon {
+		position: absolute;
+		top: 70rpx;
+		left: 40rpx;
+		font-size: 50rpx;
+		color: #F0F0F0;
+		z-index: 200;
 	}
-	.current {
-		border-bottom: 1px solid;
-		transition: .5s ease-in;
-	}
-	.drawer-window {
-		.item-background {
-			background-color: rgba(255, 255, 255, .6) !important;
-		}
+
+	.attentionBtn {
+		position: absolute;
+		top: 32%;
+		left: 65%;
+		height: auto;
+		writing-mode: vertical-lr;
+		background-color: rgba(0, 0, 0, 0.2)!important;
+		border: 1px solid rgba(0, 0, 0, 0.1);
+		z-index: 200;
+		padding: 20rpx 10rpx;
 	}
 </style>

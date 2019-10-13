@@ -3,14 +3,14 @@
 		<view class="footer-item" @click="toHomePage">
 			<view class="text">首页</view>
 		</view>
-		<view class="footer-item">
+		<view class="footer-item" @click="toDynamicPage">
 			<view class="text">关注</view>
 		</view>
 		<view class="footer-item" @click="toUploadPage">
 			<view class="cuIcon-add add-button">
 			</view>
 		</view>
-		<view class="footer-item">
+		<view class="footer-item" @click="toMessagePage">
 			<view class="text">消息</view>
 		</view>
 		<view class="footer-item" @click="toMinePage">
@@ -30,6 +30,16 @@
 			toHomePage() {
 				uni.switchTab({
 					url:'../../pages/index/index'
+				})
+			},
+			toDynamicPage() {
+				uni.switchTab({
+					url:'../../pages/dynamic/dynamic'
+				})
+			},
+			toMessagePage() {
+				uni.switchTab({
+					url:'../../pages/message/message'
 				})
 			},
 			toUploadPage() {

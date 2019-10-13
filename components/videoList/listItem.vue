@@ -33,14 +33,17 @@
 				let page = getCurrentPages();
 				let currentPage = page[0].__route__
 				let isMine = false
+				let isDynamic = false
 				if (currentPage === "pages/mine/mine") {
 					isMine = true
+				} else if (currentPage === "pages/dynamic/dynamic") {
+					isDynamic = true
 				}
 				uni.redirectTo({
-					url:'../../pages/video/videoSingle?videoItem=' + JSON.stringify(this.video) + '&isMine=' + isMine
+					url:'../../pages/video/videoSingle?videoItem=' + JSON.stringify(this.video) + '&isMine=' + isMine + '&isDynamic=' + isDynamic
 				})
 			}
-		}
+		},
 	}
 </script>
 

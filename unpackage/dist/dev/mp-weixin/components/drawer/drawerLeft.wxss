@@ -1,0 +1,27 @@
+.drawer-window .logout-btn.data-v-13dd846e {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100rpx;
+  margin: 0 auto;
+  width: 90%;
+  height: 90rpx;
+  line-height: 90rpx;
+  border-radius: 40rpx;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f43f3b), to(#ec008c));
+  background: -o-linear-gradient(top, #f43f3b 0, #ec008c 100%);
+  background: linear-gradient(180deg, #f43f3b 0, #ec008c 100%);
+  text-align: center;
+  font-size: 40rpx;
+  color: #FFFFFF;
+}
+.drawer-window .item-background.data-v-13dd846e {
+  background-color: rgba(255, 255, 255, 0.6) !important;
+}
+.change-Input.data-v-13dd846e {
+  border-bottom: 1px solid #F9D7EA;
+  text-align: left;
+  padding-left: 10rpx;
+  margin-bottom: 0;
+}
+

@@ -23,6 +23,7 @@
 				default: false
 			},
 			isMine: Boolean,
+			isDynamic: Boolean,
 			videoItem: Object
 		},
 		methods: {
@@ -34,9 +35,12 @@
 			},
 			handleBack() {
 				if (this.isMine) {
-					
 					uni.switchTab({
 						url: '../../pages/mine/mine'
+					})
+				} else if(this.isDynamic) {
+					uni.switchTab({
+						url: '../../pages/dynamic/dynamic'
 					})
 				} else {
 					uni.redirectTo({

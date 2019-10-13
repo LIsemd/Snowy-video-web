@@ -1,0 +1,11 @@
+.follow-list.data-v-89022570 {
+  height: 120rpx;
+  background-color: #F5F5F5;
+  padding-left: 30rpx;
+}
+.avatar.data-v-89022570 {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+

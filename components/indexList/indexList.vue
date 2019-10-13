@@ -3,14 +3,14 @@
 		<block v-for="(item,index) in videoList" :key="item.id">
 			<view class="cu-card case" @click="toVideoPage(index)">
 				<view class="cu-item shadow">
-					<view class="image" style="height: 450rpx; width: 100%;">
-						<image :src="baseUrl + item.coverPath" mode="aspectFill" style="height: 100%; width: 100%;"></image>
-						<!-- <view class="cu-tag bg-blue">史诗</view> -->
+					<view class="image" style="height: 450rpx; width: 100%;background-repeat: no-repeat; background-size: cover;" :style="{'background-image':'url(' + baseUrl + item.coverPath + ')'}">
+						<!-- 使用 image 可能造成手机闪屏 -->
+						<!-- <image :src="baseUrl + item.coverPath" mode="aspectFill" style="height: 100%; width: 100%;"></image> -->
+						<!-- <view class="cu-tag bg-blue">tag</view> -->
 						<view class="cu-bar bg-shadeBottom"> <text class="text-cut">{{item.videoDesc}}</text></view>
 					</view>
 					<view class="cu-list menu-avatar">
 						<view class="cu-item">
-							<!-- 背景样式动态绑定  :style="{'background': 'url(' + item.avatar + ')'}"  -->
 							<view class="cu-avatar round lg">
 								<image :src="baseUrl + item.avatar" mode="widthFix" style="height: 100%; width: 100%; border-radius: 50%;"></image>
 							</view>

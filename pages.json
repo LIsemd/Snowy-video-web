@@ -1,6 +1,20 @@
 {
-	"pages": [{
+	"pages": [
+	{
 			"path": "pages/login/login",
+			"style": {}
+		},
+		{
+			"path": "pages/comment/comment",
+			"style": {}
+		},
+		{
+			"path": "pages/report/report",
+			"style": {}
+		},
+	
+		{
+			"path": "pages/friend/friend",
 			"style": {}
 		}, {
 			"path": "pages/index/index",

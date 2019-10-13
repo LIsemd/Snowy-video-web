@@ -60,14 +60,15 @@
 	.author {
 		height: 66rpx;
 		line-height: 66rpx;
-		font-size: 36rpx;
+		font-size: 34rpx;
 	}
 
 	.title {
-		width: 100%;
-		line-height: 66rpx;
-		font-size: 32rpx;
-		word-wrap: break-word;
+		width: 420rpx;
+		line-height: 80rpx;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
 		color: #FFFAF0;
 	}
 

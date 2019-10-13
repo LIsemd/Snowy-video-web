@@ -1,3 +1,5 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "dynamic-list": "/components/videoList/dynamicList"
+  }
 }

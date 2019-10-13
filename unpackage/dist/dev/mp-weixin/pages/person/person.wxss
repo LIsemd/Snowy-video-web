@@ -139,14 +139,6 @@
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 70%, rgba(0, 0, 0, 0.8) 100%);
     z-index: 100;
 }
-.header .back-icon {
-    position: absolute;
-    top: 70rpx;
-    left: 40rpx;
-    font-size: 50rpx;
-    color: #F0F0F0;
-    z-index: 200;
-}
 .header .header-background {
     position: absolute;
     left: 0;
@@ -161,7 +153,7 @@
     height: 160rpx;
     z-index: 200;
 }
-.header .attentionBtn {
+.header .nickname {
     position: absolute;
     top: 70%;
     left: 50%;
@@ -170,6 +162,7 @@
             transform: translateX(-50%);
     height: 50rpx;
     width: auto;
+    min-width: 120rpx;
     background-color: rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(0, 0, 0, 0.1);
     z-index: 200;
@@ -192,7 +185,25 @@
   -o-transition: .5s ease-in;
   transition: .5s ease-in;
 }
-.drawer-window .item-background {
-  background-color: rgba(255, 255, 255, 0.6) !important;
+.back-icon {
+  position: absolute;
+  top: 70rpx;
+  left: 40rpx;
+  font-size: 50rpx;
+  color: #F0F0F0;
+  z-index: 200;
+}
+.attentionBtn {
+  position: absolute;
+  top: 32%;
+  left: 65%;
+  height: auto;
+  -webkit-writing-mode: vertical-lr;
+      -ms-writing-mode: tb-lr;
+          writing-mode: vertical-lr;
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  z-index: 200;
+  padding: 20rpx 10rpx;
 }
 

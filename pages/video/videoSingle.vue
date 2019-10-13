@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<video-header :single="true" :isMine="isMine" :videoItem="videoItem"></video-header>
+		<video-header :single="true" :isDynamic="isDynamic" :isMine="isMine" :videoItem="videoItem"></video-header>
 		<video-item :videoItem="videoItem"></video-item>
 		<video-footer></video-footer>
 	</view>
@@ -19,13 +19,18 @@
 		data() {
 			return {
 				videoItem: '',
-				isMine: false
+				// 是否是我的页面
+				isMine: false,
+				// 是否使用 navigationback
+				isDynamic: false
 			}
 		},
 		onLoad(params) {
 			this.videoItem = JSON.parse(params.videoItem)
 			if (params.isMine === 'true') {
 				this.isMine = true
+			} else if (params.isDynamic === 'true') {
+				this.isDynamic = true
 			}
 		}
 	}

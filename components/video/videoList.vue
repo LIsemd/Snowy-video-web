@@ -10,6 +10,7 @@
 						<view class="left-box">
 							<list-left :video="item"></list-left>
 						</view>
+						<view class="center-box" v-show="isPause" @click="clickPlay"><text class="cuIcon-stop"></text></view>
 						<view class="right-box">
 							<list-right ref="listRight" :video="item"></list-right>
 						</view>
@@ -42,7 +43,9 @@
 			return {
 				baseUrl: getApp().globalData.baseUrl,
 				videoList: getApp().globalData.videoList,
-				currentPage: getApp().globalData.currentPage
+				currentPage: getApp().globalData.currentPage,
+				isPause: false,
+				isComment: false
 			}
 		},
 		mounted() {
@@ -66,20 +69,27 @@
 					this.$refs.players[index].pause();
 					return
 				}
-				this.$refs.players[this.currentPage].playFromHead(this.currentPage);
 				this.$refs.players[index].pause();
+				this.$refs.players[this.currentPage].playFromHead(this.currentPage);
 			},
 			// 双击点赞
 			follow(index) {
-				this.$refs.listRight[index].changeColor();
+				this.$refs.listRight[index].handleFollow();
 			},
 			// 开启旋转动画
 			playAnimate(index) {
+				this.isPause = false
 				this.$refs.listRight[index].playAnimate();
 			},
 			// 暂停旋转动画
 			pauseAnimate(index) {
+				this.isPause = true
 				this.$refs.listRight[index].pauseAnimate();
+			},
+			clickPlay() {
+				this.isPause = false
+				this.$refs.listRight[this.currentPage].playAnimate();
+				this.$refs.players[this.currentPage].play();
 			},
 			// 上滑与下滑功能实现
 			slider(e) {
@@ -112,6 +122,22 @@
 		z-index: 200;
 	}
 
+	.center-box {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		font-size: 70rpx;
+		text-align: center;
+		line-height: 100rpx;
+		color: #FFF;
+		width: 100rpx;
+		height: 100rpx;
+		border-radius: 50%;
+		background: rgba(255, 255, 255, .15);
+		z-index: 200;
+	}
+
 	.left-box {
 		position: absolute;
 		bottom: 100rpx;
@@ -138,6 +164,7 @@
 		width: 100%;
 		height: 100%;
 	}
+
 	.container {
 		height: 100vh;
 		width: 100%;
@@ -146,12 +173,12 @@
 		flex-direction: row;
 		padding-top: 500rpx;
 		background-color: #FFF;
-	
+
 		.image {
 			width: 300rpx;
 			height: 300rpx;
 		}
-	
+
 		.content {
 			display: inline-block;
 			height: 300rpx;

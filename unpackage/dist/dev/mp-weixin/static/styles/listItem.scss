@@ -1,0 +1,29 @@
+	.image {
+		height: 170rpx;
+		border-radius: 10rpx;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+	.container {
+		height: auto;
+		width: 100%;
+		text-align: center;
+		display: flex;
+		flex-direction: row;
+		padding: 150rpx 0 200rpx 0;
+		box-shadow: 2px 2px 5px #e0e0e0;
+		background-color: #FFF;
+	
+		.image {
+			width: 300rpx;
+			height: 300rpx;
+		}
+	
+		.content {
+			display: inline-block;
+			height: 300rpx;
+			padding-top: 100rpx;
+			font-size: 44rpx;
+			flex: 1;
+		}
+	}

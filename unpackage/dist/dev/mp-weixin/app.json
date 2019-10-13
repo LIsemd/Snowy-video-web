@@ -1,6 +1,9 @@
 {
   "pages": [
     "pages/login/login",
+    "pages/comment/comment",
+    "pages/report/report",
+    "pages/friend/friend",
     "pages/index/index",
     "pages/person/person",
     "pages/message/message",
@@ -56,5 +59,6 @@
   "usingComponents": {
     "cu-custom": "/components/cu-custom/cu-custom",
     "cu-dialog": "/components/cu-dialog/cu-dialog"
-  }
+  },
+  "sitemapLocation": "sitemap54.json"
 }

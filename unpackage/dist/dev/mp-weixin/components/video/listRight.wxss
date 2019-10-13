@@ -1,6 +1,6 @@
 .list-right.data-v-a98ebcc6 {
   width: 120rpx;
-  margin-right: 20rpx;
+  margin-right: 10rpx;
 }
 .list-right .author-img.data-v-a98ebcc6 {
     position: relative;
@@ -46,14 +46,16 @@
     height: 120rpx;
     text-align: center;
     margin-top: 40rpx;
-    -webkit-animation: around-data-v-a98ebcc6 2.5s linear .2s infinite;
-            animation: around-data-v-a98ebcc6 2.5s linear .2s infinite;
+    -webkit-animation: around-data-v-a98ebcc6 3.5s linear .2s infinite;
+            animation: around-data-v-a98ebcc6 3.5s linear .2s infinite;
 }
 .list-right .music-img .img.data-v-a98ebcc6 {
       width: 120rpx;
       height: 120rpx;
       border-radius: 50%;
-      border: 2px solid #FFFFFF;
+      background: #F1F1F1;
+      opacity: .8;
+      border: 2px solid #F1F1F1;
 }
 .list-right .pauseAnimate.data-v-a98ebcc6 {
     -webkit-animation-play-state: paused;

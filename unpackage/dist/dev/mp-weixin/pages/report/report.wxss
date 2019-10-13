@@ -1,0 +1,39 @@
+.report-header.data-v-49d3f988 {
+  height: 100rpx;
+  width: 100%;
+  line-height: 100rpx;
+  font-size: 32rpx;
+  color: #F2F2F3;
+  background-color: #212C37;
+}
+.report-content.data-v-49d3f988 {
+  padding-top: 50rpx;
+  height: auto;
+  width: 100%;
+  color: #F2F2F3;
+  font-size: 32rpx;
+  background-color: #212C37;
+}
+.report-content .report-area.data-v-49d3f988 {
+    width: 90%;
+    padding: 30rpx;
+    margin: 40rpx auto;
+    background: #2C405A;
+    height: 340rpx;
+}
+.report-content .report-tip.data-v-49d3f988 {
+    color: #E7EBED;
+    font-size: 24rpx;
+    margin: 40rpx;
+}
+.submit.data-v-49d3f988 {
+  margin-top: 80rpx;
+  width: 80%;
+  height: 80rpx;
+  color: #F2F2F3;
+  font-size: 36rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 10rpx;
+}
+

@@ -22,7 +22,7 @@
 				<view class="cu-form-group">
 					<text class="cuIcon-title text-blue"></text>
 					<view class="title">作品描述：</view>
-					<input name="input" v-model="description" style="text-align: left;"></input>
+					<input name="input" v-model="description" style="text-align: left; margin-left: -18rpx;"></input>
 					<text class='cuIcon-info text-orange'></text>
 				</view>
 				<view class="cu-bar bg-white">
@@ -169,8 +169,7 @@
 				buttonClicked: false,
 			}
 		},
-		onLoad() {
-		},
+		onLoad() {},
 		methods: {
 			// Loading
 			loadProgress() {
@@ -198,9 +197,9 @@
 						this.tempHeight = res.height
 						this.tempWidth = res.width
 						this.tempVideoUrl = res.tempFilePath
-						if (res.duration > 61) {
+						if (res.duration > 121) {
 							uni.showToast({
-								title: '视频长度不能超过60秒',
+								title: '视频长度不能超过120秒',
 								icon: 'none',
 								duration: 2000
 							})
@@ -250,6 +249,16 @@
 			},
 			handleNext() {
 				if (this.basics == 0 && this.isSelectVideo) {
+					// 特殊字符检验
+					let pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>《》/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]");
+					if (pattern.test(this.description)) {
+						uni.showToast({
+							title: '标题不能含有特殊字符 ~',
+							icon: 'none',
+							duration: 1500
+						})
+						return
+					}
 					this.basics++
 					uni.request({
 						url: this.baseUrl + '/bgm/list',
@@ -293,6 +302,7 @@
 							let data = JSON.parse(res.data)
 							if (data.status === 200) {
 								// 上传封面图片
+								console.log('----------视频上传成功-----------');
 								if (this.tempCoverUrl != '') {
 									let videoId = data.data
 									uni.uploadFile({
@@ -314,7 +324,7 @@
 												uni.showToast({
 													title: '上传失败(。-`ω´-)',
 													icon: 'none',
-													duration:2000
+													duration: 2000
 												})
 												this.buttonClicked = false
 											}

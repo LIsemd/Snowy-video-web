@@ -8,6 +8,23 @@
   right: 30rpx;
   z-index: 200;
 }
+.center-box.data-v-49adc8eb {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  font-size: 70rpx;
+  text-align: center;
+  line-height: 100rpx;
+  color: #FFF;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  z-index: 200;
+}
 .left-box.data-v-49adc8eb {
   position: absolute;
   bottom: 100rpx;

@@ -1,10 +1,12 @@
-.image.data-v-cc322db0 {
+.image {
   height: 170rpx;
   border-radius: 10rpx;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-.container.data-v-cc322db0 {
+.container {
   height: auto;
-  width: 94%;
+  width: 100%;
   text-align: center;
   display: -webkit-box;
   display: -webkit-flex;
@@ -15,17 +17,16 @@
   -webkit-flex-direction: row;
       -ms-flex-direction: row;
           flex-direction: row;
-  margin: 100rpx auto 0;
-  padding: 100rpx 0;
+  padding: 150rpx 0 200rpx 0;
   -webkit-box-shadow: 2px 2px 5px #e0e0e0;
           box-shadow: 2px 2px 5px #e0e0e0;
   background-color: #FFF;
 }
-.container .image.data-v-cc322db0 {
+.container .image {
     width: 300rpx;
     height: 300rpx;
 }
-.container .content.data-v-cc322db0 {
+.container .content {
     display: inline-block;
     height: 300rpx;
     padding-top: 100rpx;
