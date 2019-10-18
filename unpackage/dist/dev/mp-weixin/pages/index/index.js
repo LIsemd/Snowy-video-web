@@ -142,21 +142,18 @@ __webpack_require__.r(__webpack_exports__);
     return {
       // 服务器地址
       baseUrl: getApp().globalData.baseUrl,
-      // 视频相关
-      videoList: [],
       // 屏幕宽度
-      screenWidth: 350,
-      isNoMore: false };
+      screenWidth: 350 };
 
   },
   onShow: function onShow() {var _this = this;
     this.setTabBarIndex(0);var _loop = function _loop(
     i) {
       if (i === 1) {
-        _this.getAllVideoList(1);
+        _this.$refs.videoList.getAllVideoList(1);
       } else {
         setTimeout(function () {
-          _this.getAllVideoList(i);
+          _this.$refs.videoList.getAllVideoList(i);
         }, 500);
       }};for (var i = 1; i <= getApp().globalData.page; i++) {_loop(i);
     }
@@ -167,50 +164,21 @@ __webpack_require__.r(__webpack_exports__);
   onReachBottom: function onReachBottom() {
     // 判断当前页数和总页数是否相等
     if (getApp().globalData.page === getApp().globalData.totalPage) {
-      this.isNoMore = true;
+      this.$refs.videoList.isNoMore = true;
       return;
     }
     var nextPage = getApp().globalData.page + 1;
-    this.getAllVideoList(nextPage);
+    this.$refs.videoList.getAllVideoList(nextPage);
   },
   // 下拉刷新
   onPullDownRefresh: function onPullDownRefresh() {
-    this.getAllVideoList(1);
+    this.$refs.videoList.getAllVideoList(1);
     getApp().globalData.page = 1;
   },
   // 仅第一次进入会触发onLoad
   onLoad: function onLoad() {
     this.screenWidth = uni.getSystemInfo().screenWidth;
-  },
-  methods: {
-    getAllVideoList: function getAllVideoList(page) {var _this2 = this;
-      uni.request({
-        url: this.baseUrl + '/video/showVideos?page=' + page + '&isSaveRecord=' + 0,
-        method: "POST",
-        data: {
-          'videoDesc': '' },
-
-        success: function success(res) {
-          if (res.data.status === 200) {
-            // 判断当前页是否为第一页，若是，则设置videoList为空
-            uni.stopPullDownRefresh();
-            if (page === 1) {
-              _this2.videoList = [];
-            }
-            var data = res.data.data;
-            _this2.videoList = _this2.videoList.concat(data.rows);
-            getApp().globalData.videoList = _this2.videoList;
-            if (data.page > getApp().globalData.page) {
-              getApp().globalData.page = data.page;
-            }
-            getApp().globalData.totalPage = data.total;
-            if (data.page === data.total || _this2.videoList.length === 0) {
-              _this2.isNoMore = true;
-            }
-          }
-        } });
-
-    } } };exports.default = _default;
+  } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })

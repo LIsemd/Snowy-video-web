@@ -170,7 +170,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 {
   data: function data() {
     return {
-      baseUrl: getApp().globalData.baseUrl };
+      fileUrl: getApp().globalData.fileUrl };
 
   },
   props: ['videoList', 'isEmpty'],

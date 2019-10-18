@@ -2,8 +2,9 @@
 	import Vue from 'vue'
 	export default {
 		globalData: {
-			baseUrl: 'http://127.0.0.1:8080',
-			// baseUrl: 'http://192.168.43.61:8080',
+			baseUrl: 'http://106.15.38.136:8080/video',
+			fileUrl: 'http://106.15.38.136:8080',
+			// baseUrl: 'http://localhost:8080',
 			searchInfo: {},
 			videoList: [],
 			currentPage: 0,

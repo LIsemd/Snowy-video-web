@@ -171,6 +171,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       baseUrl: getApp().globalData.baseUrl,
+      fileUrl: getApp().globalData.fileUrl,
       userInfo: getApp().globalData.getGlobalUserInfo(),
       videoList: [],
       isEmpty: false,

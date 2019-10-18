@@ -9,7 +9,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.7.0",
 	"appid": "wxbef33f8ff3f907ac",
-	"projectname": "Snowy-video",
+	"projectname": "Snowy%E7%9F%AD%E8%A7%86%E9%A2%91",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {
@@ -21,7 +21,15 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
+			"current": -1,
+			"list": []
+		},
+		"gamePlugin": {
 			"current": -1,
 			"list": []
 		},
@@ -29,10 +37,10 @@
 			"current": 0,
 			"list": [
 				{
-					"name": "",
-					"path": "",
-					"query": "",
-					"id": 0
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"scene": null
 				}
 			]
 		}

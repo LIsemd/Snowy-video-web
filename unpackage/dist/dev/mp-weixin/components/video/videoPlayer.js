@@ -118,7 +118,7 @@ var timer = null;var _default =
 {
   data: function data() {
     return {
-      baseUrl: getApp().globalData.baseUrl,
+      fileUrl: getApp().globalData.fileUrl,
       isPlay: false,
       clickCount: 0,
       cover: "cover",
@@ -132,7 +132,7 @@ var timer = null;var _default =
   },
   mounted: function mounted() {var _this = this;
     var video = this.video;
-    this.videoPath = this.baseUrl + video.videoPath;
+    this.videoPath = this.fileUrl + video.videoPath;
     // 横向视频进行自适应
     if (video.videoWidth >= video.videoHeight) {
       this.cover = "";
@@ -142,7 +142,7 @@ var timer = null;var _default =
     if (this.index === this.currentPage) {
       setTimeout(function () {
         _this.play();
-      }, 150);
+      }, 100);
     }
   },
   methods: {

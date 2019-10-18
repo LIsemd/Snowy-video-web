@@ -139,6 +139,7 @@ var _default =
   data: function data() {
     return {
       baseUrl: getApp().globalData.baseUrl,
+      fileUrl: getApp().globalData.fileUrl,
       fanList: [],
       isEmpty: false,
       avatarUrl: '/static/images/avatar.jpg',

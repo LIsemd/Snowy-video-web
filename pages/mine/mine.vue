@@ -38,7 +38,7 @@
 		<view :class="{show: isAvatarEdit}" class="DrawerClose" @click="handleEdit">
 			<text class="cuIcon-pullright"></text>
 		</view>
-		<drawer-left :isAvatarEdit="isAvatarEdit" :userData="userData" :isMe="true"
+		<drawer-left :isAvatarEdit="isAvatarEdit" :isMe="true"
 				@handleEdit="handleEdit"
 				@changeGender="changeGender"
 				@changeNickName="changeNickName"
@@ -140,13 +140,12 @@
 						if (res.data.status === 200) {
 							let data = res.data.data
 							data.userToken = user.userToken
-							this.userData = data
 							getApp().globalData.setGlobalUserInfo(data)
 							if (data.avatar != null && data.avatar != '' && data.avatar != undefined) {
-								this.avatarUrl = getApp().globalData.baseUrl + data.avatar
+								this.avatarUrl = getApp().globalData.fileUrl + data.avatar
 							}
 							if (data.backgroundImage != null && data.backgroundImage != '' && data.backgroundImage != undefined) {
-								this.backgroundImage = getApp().globalData.baseUrl + data.backgroundImage
+								this.backgroundImage = getApp().globalData.fileUrl + data.backgroundImage
 							}
 							this.nickname = data.nickname
 							this.userInfo[0].value = data.fansCounts

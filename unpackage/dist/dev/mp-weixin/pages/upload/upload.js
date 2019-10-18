@@ -321,9 +321,9 @@ var _default =
           _this2.tempHeight = res.height;
           _this2.tempWidth = res.width;
           _this2.tempVideoUrl = res.tempFilePath;
-          if (res.duration > 121) {
+          if (res.duration > 181) {
             uni.showToast({
-              title: '视频长度不能超过120秒',
+              title: '视频长度不能超过180秒',
               icon: 'none',
               duration: 2000 });
 
@@ -374,7 +374,7 @@ var _default =
     handleNext: function handleNext() {var _this4 = this;
       if (this.basics == 0 && this.isSelectVideo) {
         // 特殊字符检验
-        var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>《》/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]");
+        var pattern = new RegExp("`#$^&*=|';'./￥……&*——|‘；：”“'、？");
         if (pattern.test(this.description)) {
           uni.showToast({
             title: '标题不能含有特殊字符 ~',
@@ -426,7 +426,7 @@ var _default =
             var data = JSON.parse(res.data);
             if (data.status === 200) {
               // 上传封面图片
-              console.log('----------视频上传成功-----------');
+              // console.log('----------视频上传成功-----------');
               if (_this4.tempCoverUrl != '') {
                 var videoId = data.data;
                 uni.uploadFile({
@@ -486,7 +486,9 @@ var _default =
       this.isShowSelectModel = false;
     },
     handleBack: function handleBack() {
-      uni.navigateBack();
+      uni.switchTab({
+        url: '../index/index' });
+
     },
     // 选择BGM
     checkBgm: function checkBgm(id) {var _this5 = this;
@@ -496,7 +498,7 @@ var _default =
           if (bgm.id === id) {
             _this5.bgmName = bgm.name;
             _this5.bgmAuthor = bgm.author;
-            _this5.bgmSrc = _this5.baseUrl + bgm.path;
+            _this5.bgmSrc = getApp().globalData.fileUrl + bgm.path;
             _this5.isSelectBgm = true;
           }
         });

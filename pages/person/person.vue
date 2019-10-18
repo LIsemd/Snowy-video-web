@@ -89,11 +89,13 @@
 				createrId: '',
 				isAvatarEdit: false,
 				isMe: false,
-				isFollow: false
+				isFollow: false,
+				isLoading: false
 			}
 		},
 		onLoad(params) {
 			let baseUrl = getApp().globalData.baseUrl
+			let fileUrl = getApp().globalData.fileUrl
 			// 获取当前视频作者ID
 			this.createrId = params.userId
 			let user = getApp().globalData.getGlobalUserInfo()
@@ -113,10 +115,10 @@
 						let data = res.data.data
 						this.userData = data
 						if (data.avatar != null && data.avatar != '' && data.avatar != undefined) {
-							this.avatarUrl = baseUrl + data.avatar
+							this.avatarUrl = fileUrl + data.avatar
 						}
 						if (data.backgroundImage != null && data.backgroundImage != '' && data.backgroundImage != undefined) {
-							this.backgroundImage = baseUrl + data.backgroundImage
+							this.backgroundImage = fileUrl + data.backgroundImage
 						}
 						this.nickname = data.nickname
 						this.userInfo[0].value = data.fansCounts
@@ -163,11 +165,15 @@
 				uni.navigateBack()
 			},
 			handleFollow() {
+				if (this.isLoading) {
+					return
+				}
 				let user = getApp().globalData.getGlobalUserInfo()
 				let url = this.baseUrl + '/user/follow?userId=' + this.createrId + '&fanId=' + user.id
 				if (this.isFollow) {
 					url = this.baseUrl + '/user/unFollow?userId=' + this.createrId + '&fanId=' + user.id
 				}
+				this.isLoading = true
 				uni.request({
 					url: url,
 					method: 'POST',
@@ -177,6 +183,7 @@
 						'userToken': user.userToken
 					},
 					success: (res) => {
+						this.isLoading = false
 						if (res.data.status === 200) {
 							this.isFollow = !this.isFollow
 							if (this.isFollow) {

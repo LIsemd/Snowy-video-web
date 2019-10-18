@@ -116,6 +116,7 @@
 			return {
 				// 服务器地址
 				baseUrl: getApp().globalData.baseUrl,
+				fileUrl: getApp().globalData.fileUrl,
 				tempNickName: '',
 				tempSignature: '',
 				tempSex: true,
@@ -136,32 +137,30 @@
 				},
 			}
 		},
-		props: ['isAvatarEdit', 'userData', 'isMe'],
+		props: ['isAvatarEdit', 'isMe'],
 		mounted() {
-			// 设置延迟，防止未获取数据时就开始渲染
-			setTimeout(() => {
-				if (this.userData) {
-					this.getUserMsg()
-				}
-			}, 600)
+			this.getUserMsg()
 		},
 		methods: {
 			// 获取用户信息
 			getUserMsg() {
-				if (this.userData.avatar) {
-					this.avatarUrl = this.baseUrl + this.userData.avatar
+				let user = getApp().globalData.getGlobalUserInfo()
+				if (user.avatar != null && user.avatar != '' && user.avatar != undefined) {
+					this.avatarUrl = this.fileUrl + user.avatar
 				}
-				this.backgroundImage = this.baseUrl + this.userData.backgroundImage
-				this.uid = this.userData.id.toString().slice(0, 8)
-				this.nickname = this.userData.nickname
-				this.signature = this.userData.signature
-				if (this.userData.gender === 1) {
+				if (user.backgroundImage != null && user.backgroundImage != '' && user.backgroundImage != undefined) {
+					this.backgroundImage = this.fileUrl + user.backgroundImage
+				}
+				this.uid = user.id.toString().slice(0, 8)
+				this.nickname = user.nickname
+				this.signature = user.signature
+				if (user.gender === 1) {
 					this.tempSex = true
 					this.gender = {
 						type: '男',
 						class: 'cuIcon-male bg-blue'
 					}
-				} else if (this.userData.gender === 2) {
+				} else if (user.gender === 2) {
 					this.tempSex = false
 					this.gender = {
 						type: '女',
@@ -268,10 +267,10 @@
 
 									let imageUrl = data.data
 									if (obj === 'avatar') {
-										this.avatarUrl = this.baseUrl + imageUrl
+										this.avatarUrl = this.fileUrl + imageUrl
 										this.$emit('changeAvatar', this.avatarUrl)
 									} else if (obj === 'backgroundImage') {
-										this.backgroundImage = this.baseUrl + imageUrl
+										this.backgroundImage = this.fileUrl + imageUrl
 										this.$emit('changeBackgroundImage', this.backgroundImage)
 									}
 

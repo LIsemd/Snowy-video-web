@@ -161,6 +161,7 @@ __webpack_require__.r(__webpack_exports__);
       followList: [],
       videoList: [],
       baseUrl: getApp().globalData.baseUrl,
+      fileUrl: getApp().globalData.fileUrl,
       isEmpty: false,
       isVideoEmpty: false };
 

@@ -136,6 +136,7 @@ var _default =
   data: function data() {
     return {
       baseUrl: getApp().globalData.baseUrl,
+      fileUrl: getApp().globalData.fileUrl,
       isFollow: false,
       isFav: false,
       isPauseAnimate: true,
@@ -143,15 +144,13 @@ var _default =
       videoInfo: '',
       avatar: '',
       userInfo: getApp().globalData.getGlobalUserInfo(),
-      clickLoading: false,
-      commentsLength: 0 };
+      clickLoading: false };
 
   },
   mounted: function mounted() {
     this.videoInfo = this.video;
-    this.avatar = this.baseUrl + this.video.avatar;
+    this.avatar = this.fileUrl + this.video.avatar;
     this.getFav();
-    this.getAllComments();
   },
   props: ['index', 'video'],
   methods: {
@@ -172,23 +171,6 @@ var _default =
         } });
 
     },
-    // 获取评论数量
-    getAllComments: function getAllComments() {var _this2 = this;
-      uni.request({
-        url: this.baseUrl + '/video/getVideoComments?videoId=' + this.video.id,
-        method: 'POST',
-        header: {
-          'content-type': 'application/json',
-          'userId': this.userInfo.id,
-          'userToken': this.userInfo.userToken },
-
-        success: function success(res) {
-          if (res.data.status === 200) {
-            _this2.commentsLength = res.data.data.length;
-          }
-        } });
-
-    },
     // 打开评论界面
     handleComment: function handleComment() {
       uni.navigateTo({
@@ -196,13 +178,13 @@ var _default =
 
     },
     // 打开分享与举报
-    handleForward: function handleForward() {var _this3 = this;
+    handleForward: function handleForward() {var _this2 = this;
       uni.showActionSheet({
         itemList: ['分享到朋友圈', '分享到QQ空间', '分享到微博', '举报用户'],
         success: function success(res) {
           if (res.tapIndex === 3) {
             uni.navigateTo({
-              url: '../../pages/report/report?dealUserId=' + _this3.video.userId + '&dealVideoId=' + _this3.video.id });
+              url: '../../pages/report/report?dealUserId=' + _this2.video.userId + '&dealVideoId=' + _this2.video.id });
 
           } else {
             uni.showToast({
@@ -221,7 +203,7 @@ var _default =
 
     },
     // 点赞与取消点赞
-    handleFollow: function handleFollow() {var _this4 = this;
+    handleFollow: function handleFollow() {var _this3 = this;
       if (this.clickLoading) {
         uni.showToast({
           title: "点击过于频繁 ~",
@@ -257,19 +239,19 @@ var _default =
           'userToken': this.userInfo.userToken },
 
         success: function success(res) {
-          _this4.clickLoading = false;
+          _this3.clickLoading = false;
           if (res.data.status === 200) {
-            _this4.isFav = !_this4.isFav;
-            if (_this4.isFav) {
-              _this4.videoInfo.likeCounts++;
+            _this3.isFav = !_this3.isFav;
+            if (_this3.isFav) {
+              _this3.videoInfo.likeCounts++;
               uni.showToast({
                 title: '点赞成功',
                 icon: 'none',
                 duration: 1000 });
 
             } else {
-              if (_this4.videoInfo.likeCounts > 0) {
-                _this4.videoInfo.likeCounts--;
+              if (_this3.videoInfo.likeCounts > 0) {
+                _this3.videoInfo.likeCounts--;
                 uni.showToast({
                   title: '取消点赞',
                   icon: 'none',
@@ -280,7 +262,7 @@ var _default =
           }
         },
         fail: function fail() {
-          _this4.clickLoading = false;
+          _this3.clickLoading = false;
         } });
 
     },

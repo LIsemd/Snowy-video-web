@@ -3,7 +3,7 @@
 		<block v-for="item in videoList" :key="item.id">
 			<list-item :video="item">
 				<block slot="image">
-					<view class="image" :style="{'background-image':'url(' + baseUrl + item.coverPath + ')'}"></view>
+					<view class="image" :style="{'background-image':'url(' + fileUrl + item.coverPath + ')'}"></view>
 				</block>
 				<block slot="seconds">
 					{{Math.floor(item.videoSeconds / 60)}}:{{Math.floor(item.videoSeconds % 60) < 10 ? '0' + Math.floor(item.videoSeconds % 60) : Math.floor(item.videoSeconds % 60)}}
@@ -38,6 +38,7 @@
 		data() {
 			return {
 				baseUrl: getApp().globalData.baseUrl,
+				fileUrl: getApp().globalData.fileUrl,
 				userInfo: getApp().globalData.getGlobalUserInfo(),
 				videoList: [],
 				isEmpty: false,

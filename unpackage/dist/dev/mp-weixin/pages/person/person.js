@@ -213,11 +213,13 @@ __webpack_require__.r(__webpack_exports__);
       createrId: '',
       isAvatarEdit: false,
       isMe: false,
-      isFollow: false };
+      isFollow: false,
+      isLoading: false };
 
   },
   onLoad: function onLoad(params) {var _this = this;
     var baseUrl = getApp().globalData.baseUrl;
+    var fileUrl = getApp().globalData.fileUrl;
     // 获取当前视频作者ID
     this.createrId = params.userId;
     var user = getApp().globalData.getGlobalUserInfo();
@@ -237,10 +239,10 @@ __webpack_require__.r(__webpack_exports__);
           var data = res.data.data;
           _this.userData = data;
           if (data.avatar != null && data.avatar != '' && data.avatar != undefined) {
-            _this.avatarUrl = baseUrl + data.avatar;
+            _this.avatarUrl = fileUrl + data.avatar;
           }
           if (data.backgroundImage != null && data.backgroundImage != '' && data.backgroundImage != undefined) {
-            _this.backgroundImage = baseUrl + data.backgroundImage;
+            _this.backgroundImage = fileUrl + data.backgroundImage;
           }
           _this.nickname = data.nickname;
           _this.userInfo[0].value = data.fansCounts;
@@ -287,11 +289,15 @@ __webpack_require__.r(__webpack_exports__);
       uni.navigateBack();
     },
     handleFollow: function handleFollow() {var _this2 = this;
+      if (this.isLoading) {
+        return;
+      }
       var user = getApp().globalData.getGlobalUserInfo();
       var url = this.baseUrl + '/user/follow?userId=' + this.createrId + '&fanId=' + user.id;
       if (this.isFollow) {
         url = this.baseUrl + '/user/unFollow?userId=' + this.createrId + '&fanId=' + user.id;
       }
+      this.isLoading = true;
       uni.request({
         url: url,
         method: 'POST',
@@ -301,6 +307,7 @@ __webpack_require__.r(__webpack_exports__);
           'userToken': user.userToken },
 
         success: function success(res) {
+          _this2.isLoading = false;
           if (res.data.status === 200) {
             _this2.isFollow = !_this2.isFollow;
             if (_this2.isFollow) {

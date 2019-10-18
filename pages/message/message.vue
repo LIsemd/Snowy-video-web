@@ -6,7 +6,7 @@
 		<view class="cu-list menu-avatar">
 			<block v-for="item in messageList" :key="item.id">
 				<view class="cu-item" @click="toCommentPage(item)">
-					<view class="cu-avatar round lg" :style="{'background-image':'url('+ baseUrl + item.coverPath +')'}"></view>
+					<view class="cu-avatar round lg" :style="{'background-image':'url('+ fileUrl + item.coverPath +')'}"></view>
 					<view class="content">
 						<view class="text-grey"> {{item.videoDesc}}</view>
 						<view class="text-gray text-sm flex">
@@ -34,6 +34,7 @@
 		data() {
 			return {
 				baseUrl: getApp().globalData.baseUrl,
+				fileUrl: getApp().globalData.fileUrl,
 				messageList: []
 			}
 		},

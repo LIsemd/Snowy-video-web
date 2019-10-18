@@ -223,6 +223,7 @@ var _default =
     return {
       // 服务器地址
       baseUrl: getApp().globalData.baseUrl,
+      fileUrl: getApp().globalData.fileUrl,
       tempNickName: '',
       tempSignature: '',
       tempSex: true,
@@ -243,32 +244,30 @@ var _default =
 
 
   },
-  props: ['isAvatarEdit', 'userData', 'isMe'],
-  mounted: function mounted() {var _this = this;
-    // 设置延迟，防止未获取数据时就开始渲染
-    setTimeout(function () {
-      if (_this.userData) {
-        _this.getUserMsg();
-      }
-    }, 600);
+  props: ['isAvatarEdit', 'isMe'],
+  mounted: function mounted() {
+    this.getUserMsg();
   },
   methods: {
     // 获取用户信息
     getUserMsg: function getUserMsg() {
-      if (this.userData.avatar) {
-        this.avatarUrl = this.baseUrl + this.userData.avatar;
+      var user = getApp().globalData.getGlobalUserInfo();
+      if (user.avatar != null && user.avatar != '' && user.avatar != undefined) {
+        this.avatarUrl = this.fileUrl + user.avatar;
       }
-      this.backgroundImage = this.baseUrl + this.userData.backgroundImage;
-      this.uid = this.userData.id.toString().slice(0, 8);
-      this.nickname = this.userData.nickname;
-      this.signature = this.userData.signature;
-      if (this.userData.gender === 1) {
+      if (user.backgroundImage != null && user.backgroundImage != '' && user.backgroundImage != undefined) {
+        this.backgroundImage = this.fileUrl + user.backgroundImage;
+      }
+      this.uid = user.id.toString().slice(0, 8);
+      this.nickname = user.nickname;
+      this.signature = user.signature;
+      if (user.gender === 1) {
         this.tempSex = true;
         this.gender = {
           type: '男',
           class: 'cuIcon-male bg-blue' };
 
-      } else if (this.userData.gender === 2) {
+      } else if (user.gender === 2) {
         this.tempSex = false;
         this.gender = {
           type: '女',
@@ -340,7 +339,7 @@ var _default =
 
     },
     // 上传图片
-    uploadImage: function uploadImage(loadingText, api, obj, successText, errorText) {var _this2 = this;
+    uploadImage: function uploadImage(loadingText, api, obj, successText, errorText) {var _this = this;
       if (!this.isMe) {
         return;
       }
@@ -355,7 +354,7 @@ var _default =
           var tempFilePaths = res.tempFilePaths;
           // 返回 String 类型
           uni.uploadFile({
-            url: _this2.baseUrl + api + user.id,
+            url: _this.baseUrl + api + user.id,
             filePath: tempFilePaths[0],
             name: 'file',
             header: {
@@ -375,11 +374,11 @@ var _default =
 
                 var imageUrl = data.data;
                 if (obj === 'avatar') {
-                  _this2.avatarUrl = _this2.baseUrl + imageUrl;
-                  _this2.$emit('changeAvatar', _this2.avatarUrl);
+                  _this.avatarUrl = _this.fileUrl + imageUrl;
+                  _this.$emit('changeAvatar', _this.avatarUrl);
                 } else if (obj === 'backgroundImage') {
-                  _this2.backgroundImage = _this2.baseUrl + imageUrl;
-                  _this2.$emit('changeBackgroundImage', _this2.backgroundImage);
+                  _this.backgroundImage = _this.fileUrl + imageUrl;
+                  _this.$emit('changeBackgroundImage', _this.backgroundImage);
                 }
 
               } else if (data.status === 500) {
@@ -436,7 +435,7 @@ var _default =
         } });
 
     },
-    changeNickName: function changeNickName() {var _this3 = this;
+    changeNickName: function changeNickName() {var _this2 = this;
       if (this.tempNickName.length === 0 || this.tempNickName.length > 10) {
         uni.showToast({
           title: '昵称修改不符合要求',
@@ -446,13 +445,13 @@ var _default =
         return;
       }
       this.changeUserInfo(this.tempNickName, '/user/updateNickName?userId=', '昵称修改成功!', '昵称修改失败', function () {
-        _this3.nickname = _this3.tempNickName;
-        _this3.$emit('changeNickName', _this3.nickname);
-        _this3.tempNickName = '';
-        _this3.closeChangeNickName();
+        _this2.nickname = _this2.tempNickName;
+        _this2.$emit('changeNickName', _this2.nickname);
+        _this2.tempNickName = '';
+        _this2.closeChangeNickName();
       });
     },
-    changeSignature: function changeSignature() {var _this4 = this;
+    changeSignature: function changeSignature() {var _this3 = this;
       if (this.tempSignature.length === 0 || this.tempSignature.length > 15) {
         uni.showToast({
           title: '签名修改不符合要求',
@@ -462,27 +461,27 @@ var _default =
         return;
       }
       this.changeUserInfo(this.tempSignature, '/user/updateSignature?userId=', '签名修改成功!', '签名修改失败', function () {
-        _this4.signature = _this4.tempSignature;
-        _this4.tempSignature = '';
-        _this4.closeChangeSignature();
+        _this3.signature = _this3.tempSignature;
+        _this3.tempSignature = '';
+        _this3.closeChangeSignature();
       });
     },
-    changeGender: function changeGender() {var _this5 = this;
+    changeGender: function changeGender() {var _this4 = this;
       var tempGender = this.tempSex ? 1 : 2;
       this.changeUserInfo(tempGender, '/user/updateGender?userId=', '性别修改成功!', '性别修改失败', function () {
         if (tempGender === 1) {
-          _this5.gender = {
+          _this4.gender = {
             type: '男',
             class: 'cuIcon-male bg-blue' };
 
         } else if (tempGender === 2) {
-          _this5.gender = {
+          _this4.gender = {
             type: '女',
             class: 'cuIcon-female bg-pink' };
 
         }
-        _this5.$emit('changeGender', _this5.gender);
-        _this5.closeChangeGender();
+        _this4.$emit('changeGender', _this4.gender);
+        _this4.closeChangeGender();
       });
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

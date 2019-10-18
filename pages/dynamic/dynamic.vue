@@ -11,7 +11,7 @@
 		<view class="follow-list" v-if="!isFollowEmpty">
 			<view class="cu-avatar-group">
 				<view class="cu-avatar round lg" v-for="(item,index) in followList" :key="index">
-					<image :src="item.avatar ? baseUrl + item.avatar : avatarUrl" mode="" class="avatar"></image>
+					<image :src="item.avatar ? fileUrl + item.avatar : avatarUrl" mode="" class="avatar"></image>
 				</view>
 			</view>
 		</view>
@@ -37,6 +37,7 @@
 				followList: [],
 				videoList: [],
 				baseUrl: getApp().globalData.baseUrl,
+				fileUrl: getApp().globalData.fileUrl,
 				isEmpty: false,
 				isVideoEmpty: false
 			}

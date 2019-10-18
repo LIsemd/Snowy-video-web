@@ -11,7 +11,7 @@
 	export default {
 		data() {
 			return {
-				baseUrl: getApp().globalData.baseUrl,
+				fileUrl: getApp().globalData.fileUrl,
 				isPlay: false,
 				clickCount: 0,
 				cover: "cover",
@@ -25,7 +25,7 @@
 		},
 		mounted() {
 			let video = this.video
-			this.videoPath = this.baseUrl + video.videoPath
+			this.videoPath = this.fileUrl + video.videoPath
 			// 横向视频进行自适应
 			if (video.videoWidth >= video.videoHeight) {
 				this.cover = ""
@@ -35,7 +35,7 @@
 			if (this.index === this.currentPage) {
 				setTimeout(() => {
 					this.play();
-				},150)
+				},100)
 			}
 		},
 		methods: {

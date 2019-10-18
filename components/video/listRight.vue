@@ -13,7 +13,7 @@
 		</view>
 		<view class="right-box">
 			<view class="icon cuIcon-commentfill" @click="handleComment"></view>
-			<view class="count">{{commentsLength}}</view>
+			<view class="count">{{videoInfo.comments}}</view>
 		</view>
 		<view class="right-box">
 			<view class="icon cuIcon-forwardfill" @click="handleForward"></view>
@@ -29,6 +29,7 @@
 		data() {
 			return {
 				baseUrl: getApp().globalData.baseUrl,
+				fileUrl: getApp().globalData.fileUrl,
 				isFollow: false,
 				isFav: false,
 				isPauseAnimate: true,
@@ -37,14 +38,12 @@
 				avatar: '',
 				userInfo: getApp().globalData.getGlobalUserInfo(),
 				clickLoading: false,
-				commentsLength: 0
 			}
 		},
 		mounted() {
 			this.videoInfo = this.video
-			this.avatar = this.baseUrl + this.video.avatar
+			this.avatar = this.fileUrl + this.video.avatar
 			this.getFav()
-			this.getAllComments()
 		},
 		props: ['index', 'video'],
 		methods: {
@@ -61,23 +60,6 @@
 					success: (res) => {
 						if (res.data.status === 200) {
 							this.isFav = res.data.data
-						}
-					}
-				})
-			},
-			// 获取评论数量
-			getAllComments() {
-				uni.request({
-					url: this.baseUrl + '/video/getVideoComments?videoId=' + this.video.id,
-					method: 'POST',
-					header: {
-						'content-type': 'application/json',
-						'userId': this.userInfo.id,
-						'userToken': this.userInfo.userToken
-					},
-					success: (res) => {
-						if (res.data.status === 200) {
-							this.commentsLength = res.data.data.length
 						}
 					}
 				})

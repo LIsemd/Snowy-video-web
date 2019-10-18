@@ -264,13 +264,12 @@ __webpack_require__.r(__webpack_exports__);
           if (res.data.status === 200) {
             var data = res.data.data;
             data.userToken = user.userToken;
-            _this.userData = data;
             getApp().globalData.setGlobalUserInfo(data);
             if (data.avatar != null && data.avatar != '' && data.avatar != undefined) {
-              _this.avatarUrl = getApp().globalData.baseUrl + data.avatar;
+              _this.avatarUrl = getApp().globalData.fileUrl + data.avatar;
             }
             if (data.backgroundImage != null && data.backgroundImage != '' && data.backgroundImage != undefined) {
-              _this.backgroundImage = getApp().globalData.baseUrl + data.backgroundImage;
+              _this.backgroundImage = getApp().globalData.fileUrl + data.backgroundImage;
             }
             _this.nickname = data.nickname;
             _this.userInfo[0].value = data.fansCounts;

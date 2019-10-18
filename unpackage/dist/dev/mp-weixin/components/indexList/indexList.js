@@ -157,18 +157,72 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var _default =
 {
   data: function data() {
     return {
-      baseUrl: getApp().globalData.baseUrl };
+      baseUrl: getApp().globalData.baseUrl,
+      fileUrl: getApp().globalData.fileUrl,
+      videoList: [],
+      isNoMore: false };
 
   },
-  props: {
-    videoList: Array,
-    isNoMore: Boolean },
-
   methods: {
+    getAllVideoList: function getAllVideoList(page) {var _this = this;
+      uni.request({
+        url: this.baseUrl + '/video/showVideos?page=' + page + '&isSaveRecord=' + 0,
+        method: "POST",
+        data: {
+          'videoDesc': '' },
+
+        success: function success(res) {
+          if (res.data.status === 200) {
+            // 判断当前页是否为第一页，若是，则设置videoList为空
+            uni.stopPullDownRefresh();
+            if (page === 1) {
+              _this.videoList = [];
+            }
+            var data = res.data.data;
+            _this.videoList = _this.videoList.concat(data.rows);
+            // 获取评论数量
+            _this.setComments();
+            getApp().globalData.videoList = _this.videoList;
+            if (data.page > getApp().globalData.page) {
+              getApp().globalData.page = data.page;
+            }
+            getApp().globalData.totalPage = data.total;
+            if (data.page === data.total || _this.videoList.length === 0) {
+              _this.isNoMore = true;
+            }
+          }
+        } });
+
+    },
+    setComments: function setComments() {var _this2 = this;
+      var user = getApp().globalData.getGlobalUserInfo();
+      this.videoList.forEach(function (item) {
+        _this2.getComments(item, user);
+      });
+    },
+    getComments: function getComments(video, user) {var _this3 = this;
+      uni.request({
+        url: this.baseUrl + '/video/getVideoComments?videoId=' + video.id,
+        method: 'POST',
+        header: {
+          'content-type': 'application/json',
+          'userId': user.id,
+          'userToken': user.userToken },
+
+        success: function success(res) {
+          if (res.data.status === 200) {
+            // 给对象额外添加一个数据字段时，视图没有立即渲染
+            // 此时可以使用 $set
+            _this3.$set(video, "comments", res.data.data.length);
+          }
+        } });
+
+    },
     toVideoPage: function toVideoPage(index) {
       getApp().globalData.currentPage = index;
       if (getApp().globalData.isSearch) {

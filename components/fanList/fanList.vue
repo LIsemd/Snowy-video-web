@@ -3,7 +3,7 @@
 		<block v-for="item in fanList" :key="item.id">
 			<view class="cu-item" @click="toPersonPage(item.id)">
 				<view class="cu-avatar round lg">
-					<image :src="item.avatar ? baseUrl + item.avatar : avatarUrl" mode="" class="avatar"></image>
+					<image :src="item.avatar ? fileUrl + item.avatar : avatarUrl" mode="" class="avatar"></image>
 				</view>
 				<view class="content">
 					<view class="text-grey">{{item.nickname}}</view>
@@ -32,6 +32,7 @@
 		data() {
 			return {
 				baseUrl: getApp().globalData.baseUrl,
+				fileUrl: getApp().globalData.fileUrl,
 				fanList: [],
 				isEmpty: false,
 				avatarUrl: '/static/images/avatar.jpg',
