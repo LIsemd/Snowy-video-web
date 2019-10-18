@@ -46,12 +46,18 @@
 			}
 		},
 		methods: {
-			getAllVideoList(page) {
+			getAllVideoList(page,isSaveRecord,searchContent) {
+				if (!isSaveRecord) {
+					isSaveRecord = 0
+				}
+				if (!searchContent) {
+					searchContent = ''
+				}
 				uni.request({
-					url: this.baseUrl + '/video/showVideos?page=' + page + '&isSaveRecord=' + 0,
+					url: this.baseUrl + '/video/showVideos?page=' + page + '&isSaveRecord=' + isSaveRecord,
 					method: "POST",
 					data: {
-						'videoDesc': ''
+						'videoDesc': searchContent
 					},
 					success: (res) => {
 						if (res.data.status === 200) {

@@ -52,10 +52,9 @@
   },
   onShow: function onShow() {
     this.setTabBarIndex(0);
-    this.getAllVideoList(this.page);
+    this.$refs.videoList.getAllVideoList(this.page, this.isSaveRecord, this.searchContent);
   },
-  onHide: function onHide() {
-  },
+  onHide: function onHide() {},
   // 上拉刷新
   onReachBottom: function onReachBottom() {
     // 判断当前页数和总页数是否相等
@@ -64,7 +63,7 @@
       return;
     }
     var nextPage = this.page + 1;
-    this.getAllVideoList(nextPage);
+    this.$refs.videoList.getAllVideoList(nextPage, this.isSaveRecord, this.searchContent);
   },
   // 仅第一次进入会触发onLoad
   onLoad: function onLoad() {
@@ -79,36 +78,6 @@
   methods: {
     handleBack: function handleBack() {
       uni.navigateBack();
-    },
-    getAllVideoList: function getAllVideoList(page) {var _this = this;
-      uni.request({
-        url: this.baseUrl + '/video/showVideos?page=' + page + '&isSaveRecord=' + this.isSaveRecord,
-        method: "POST",
-        data: {
-          'videoDesc': this.searchContent },
-
-        success: function success(res) {
-          if (res.data.status === 200) {
-            // 判断当前页是否为第一页，若是，则设置videoList为空
-            if (page === 1) {
-              _this.videoList = [];
-            }
-            uni.stopPullDownRefresh();
-            var data = res.data.data;
-            if (data.rows.length === 0) {
-              _this.isNoResult = true;
-              _this.isNoMore = true;
-            }
-            _this.videoList = _this.videoList.concat(data.rows);
-            getApp().globalData.videoList = _this.videoList;
-            _this.page = data.page;
-            _this.totalPage = data.total;
-            if (_this.page === _this.totalPage) {
-              _this.isNoMore = true;
-            }
-          }
-        } });
-
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

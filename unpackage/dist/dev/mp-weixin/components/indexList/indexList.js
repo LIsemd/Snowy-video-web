@@ -169,12 +169,18 @@ var _default =
 
   },
   methods: {
-    getAllVideoList: function getAllVideoList(page) {var _this = this;
+    getAllVideoList: function getAllVideoList(page, isSaveRecord, searchContent) {var _this = this;
+      if (!isSaveRecord) {
+        isSaveRecord = 0;
+      }
+      if (!searchContent) {
+        searchContent = '';
+      }
       uni.request({
-        url: this.baseUrl + '/video/showVideos?page=' + page + '&isSaveRecord=' + 0,
+        url: this.baseUrl + '/video/showVideos?page=' + page + '&isSaveRecord=' + isSaveRecord,
         method: "POST",
         data: {
-          'videoDesc': '' },
+          'videoDesc': searchContent },
 
         success: function success(res) {
           if (res.data.status === 200) {

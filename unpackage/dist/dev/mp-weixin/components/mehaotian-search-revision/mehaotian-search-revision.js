@@ -216,7 +216,7 @@ var _default =
           return;
         }
       }
-      console.log(this.inputVal);
+      // console.log(this.inputVal);
       this.$emit('search', this.inputVal ? this.inputVal : this.placeholder);
     } },
 
