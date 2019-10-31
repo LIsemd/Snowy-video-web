@@ -5,7 +5,6 @@
     "versionName" : "1.0.0",
     "versionCode" : "100",
     "transformPx" : false,
-    /* 5+App特有相关 */
     "app-plus" : {
         "usingComponents" : true,
         "nvueCompiler" : "uni-app",
@@ -15,11 +14,8 @@
             "autoclose" : true,
             "delay" : 0
         },
-        /* 模块配置 */
         "modules" : {},
-        /* 应用发布信息 */
         "distribute" : {
-            /* android打包配置 */
             "android" : {
                 "permissions" : [
                     "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
@@ -46,15 +42,11 @@
                     "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
                 ]
             },
-            /* ios打包配置 */
             "ios" : {},
-            /* SDK配置 */
             "sdkConfigs" : {}
         }
     },
-    /* 快应用特有相关 */
     "quickapp" : {},
-    /* 小程序特有相关 */
     "mp-weixin" : {
         "appid" : "wxbef33f8ff3f907ac",
         "setting" : {
