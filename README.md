@@ -1,6 +1,7 @@
 # Snowy-video-web
 Snowy短视频——基于uni-app 与 Springboot开发（前端部分）
-
+#### 项目UI框架为Color-ui，另外感谢本项目使用到的搜索等插件的提供者~
+----
 ## 项目演示（更详细的图片可在unpackage\images查看）
 ### 个人主页
 ![图片演示](unpackage/images/6.png)
