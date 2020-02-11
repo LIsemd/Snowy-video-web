@@ -1,4 +1,4 @@
-.report-header.data-v-49d3f988 {
+.report-header.data-v-34870506 {
   height: 100rpx;
   width: 100%;
   line-height: 100rpx;
@@ -6,7 +6,7 @@
   color: #F2F2F3;
   background-color: #212C37;
 }
-.report-content.data-v-49d3f988 {
+.report-content.data-v-34870506 {
   padding-top: 50rpx;
   height: auto;
   width: 100%;
@@ -14,19 +14,19 @@
   font-size: 32rpx;
   background-color: #212C37;
 }
-.report-content .report-area.data-v-49d3f988 {
+.report-content .report-area.data-v-34870506 {
     width: 90%;
     padding: 30rpx;
     margin: 40rpx auto;
     background: #2C405A;
     height: 340rpx;
 }
-.report-content .report-tip.data-v-49d3f988 {
+.report-content .report-tip.data-v-34870506 {
     color: #E7EBED;
     font-size: 24rpx;
     margin: 40rpx;
 }
-.submit.data-v-49d3f988 {
+.submit.data-v-34870506 {
   margin-top: 80rpx;
   width: 80%;
   height: 80rpx;

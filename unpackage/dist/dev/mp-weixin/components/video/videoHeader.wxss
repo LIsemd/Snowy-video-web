@@ -1,5 +1,5 @@
 
-.video-header.data-v-44f0d5a7 {
+.video-header.data-v-2596155c {
 	height: 50rpx;
 	line-height: 50rpx;
 	width: 100%;
@@ -10,7 +10,7 @@
 	background: rgba(0, 0, 0, 0);
 	z-index: 200;
 }
-.icon.data-v-44f0d5a7 {
+.icon.data-v-2596155c {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -19,11 +19,11 @@
 	text-align: center;
 	font-size: 45rpx;
 }
-.middle.data-v-44f0d5a7 {
+.middle.data-v-2596155c {
 	text-align: center;
 	color: white;
 }
-.text.data-v-44f0d5a7 {
+.text.data-v-2596155c {
 	display: inline;
 	margin: 0 10px;
 	font-size: 34rpx;

@@ -1,4 +1,4 @@
-.video-footer.data-v-23be71b5 {
+.video-footer.data-v-67fadd40 {
   height: 100rpx;
   line-height: 100rpx;
   margin-bottom: 10rpx;
@@ -17,7 +17,7 @@
   background: -o-linear-gradient(transparent, rgba(0, 0, 0, 0.6));
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
 }
-.video-footer .footer-item.data-v-23be71b5 {
+.video-footer .footer-item.data-v-67fadd40 {
     -webkit-box-flex: 1;
     -webkit-flex: 1;
         -ms-flex: 1;
@@ -25,12 +25,12 @@
     color: white;
     text-align: center;
 }
-.video-footer .footer-item .text.data-v-23be71b5 {
+.video-footer .footer-item .text.data-v-67fadd40 {
       display: inline;
       margin: 0 10px;
       font-size: 34rpx;
 }
-.video-footer .footer-item .add-button.data-v-23be71b5 {
+.video-footer .footer-item .add-button.data-v-67fadd40 {
       width: 90rpx;
       height: 66rpx;
       line-height: 66rpx;

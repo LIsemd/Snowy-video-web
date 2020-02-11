@@ -7489,9 +7489,9 @@ module.exports = g;
 
 /***/ }),
 /* 4 */
-/*!************************************************!*\
-  !*** D:/项目/Web实战项目/Snowy-video-web/pages.json ***!
-  \************************************************/
+/*!************************************************************!*\
+  !*** D:/项目/Web实战项目/Snowy-Video/Snowy-video-web/pages.json ***!
+  \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7593,7 +7593,10 @@ var getPlatformName = function getPlatformName() {
 var getPackName = function getPackName() {
   var packName = '';
   if (getPlatformName() === 'wx' || getPlatformName() === 'qq') {
-    packName = uni.getAccountInfoSync().miniProgram.appId || '';
+    // 兼容微信小程序低版本基础库
+    if (uni.canIUse('getAccountInfoSync')) {
+      packName = uni.getAccountInfoSync().miniProgram.appId || '';
+    }
   }
   return packName;
 };
@@ -8205,7 +8208,7 @@ Stat = /*#__PURE__*/function (_Util) {_inherits(Stat, _Util);_createClass(Stat, 
     _this6 = _possibleConstructorReturn(this, _getPrototypeOf(Stat).call(this));
     _this6.instance = null;
     // 注册拦截器
-    if (typeof uni.addInterceptor === 'function') {
+    if (typeof uni.addInterceptor === 'function' && "development" !== 'development') {
       _this6.addInterceptorInit();
       _this6.interceptLogin();
       _this6.interceptShare(true);
@@ -8393,20 +8396,20 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 
 /***/ }),
 /* 7 */
-/*!*****************************************************************!*\
-  !*** D:/项目/Web实战项目/Snowy-video-web/pages.json?{"type":"style"} ***!
-  \*****************************************************************/
+/*!*****************************************************************************!*\
+  !*** D:/项目/Web实战项目/Snowy-Video/Snowy-video-web/pages.json?{"type":"style"} ***!
+  \*****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/login/login": { "usingComponents": {} }, "pages/comment/comment": { "usingComponents": {} }, "pages/report/report": { "usingComponents": {} }, "pages/friend/friend": { "usingComponents": { "follow-list": "/components/followList/followList", "fan-list": "/components/fanList/fanList" } }, "pages/index/index": { "enablePullDownRefresh": true, "usingComponents": { "index-list": "/components/indexList/indexList", "intro-swiper": "/components/introSwiper/introSwiper" } }, "pages/person/person": { "usingComponents": { "contribute-list": "/components/videoList/contributeList", "like-list": "/components/videoList/likeList", "drawer-left": "/components/drawer/drawerLeft" } }, "pages/message/message": { "usingComponents": {} }, "pages/dynamic/dynamic": { "usingComponents": { "dynamic-list": "/components/videoList/dynamicList" } }, "pages/video/video": { "usingComponents": { "video-list": "/components/video/videoList", "video-header": "/components/video/videoHeader", "video-footer": "/components/video/videoFooter" } }, "pages/video/videoSingle": { "usingComponents": { "video-item": "/components/videoList/videoItem", "video-header": "/components/video/videoHeader", "video-footer": "/components/video/videoFooter" } }, "pages/search/search": { "usingComponents": { "m-search": "/components/mehaotian-search-revision/mehaotian-search-revision" } }, "pages/search/result": { "usingComponents": { "index-list": "/components/indexList/indexList" } }, "pages/mine/mine": { "usingComponents": { "contribute-list": "/components/videoList/contributeList", "like-list": "/components/videoList/likeList", "drawer-left": "/components/drawer/drawerLeft" } }, "pages/regist/regist": { "usingComponents": {} }, "pages/upload/upload": { "usingComponents": {} } }, "globalStyle": { "navigationStyle": "custom", "navigationBarBackgroundColor": "#0081ff", "navigationBarTitleText": "Snowy 短视频", "navigationBarTextStyle": "white" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/login/login": {}, "pages/comment/comment": {}, "pages/report/report": {}, "pages/friend/friend": {}, "pages/index/index": { "enablePullDownRefresh": true }, "pages/person/person": {}, "pages/message/message": {}, "pages/dynamic/dynamic": {}, "pages/video/video": {}, "pages/video/videoSingle": {}, "pages/search/search": {}, "pages/search/result": {}, "pages/mine/mine": {}, "pages/regist/regist": {}, "pages/upload/upload": {} }, "globalStyle": { "navigationStyle": "custom", "navigationBarBackgroundColor": "#0081ff", "navigationBarTitleText": "Snowy 短视频", "navigationBarTextStyle": "white" } };exports.default = _default;
 
 /***/ }),
 /* 8 */
-/*!****************************************************************!*\
-  !*** D:/项目/Web实战项目/Snowy-video-web/pages.json?{"type":"stat"} ***!
-  \****************************************************************/
+/*!****************************************************************************!*\
+  !*** D:/项目/Web实战项目/Snowy-Video/Snowy-video-web/pages.json?{"type":"stat"} ***!
+  \****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

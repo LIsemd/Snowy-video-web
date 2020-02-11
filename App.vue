@@ -5,6 +5,7 @@
 			baseUrl: 'http://106.15.38.136:8080/video',
 			fileUrl: 'http://106.15.38.136:8080',
 			// baseUrl: 'http://localhost:8080',
+			// fileUrl: 'http://localhost:8080',
 			searchInfo: {},
 			videoList: [],
 			currentPage: 0,

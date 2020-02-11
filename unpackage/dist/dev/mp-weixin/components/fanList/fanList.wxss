@@ -1,23 +1,23 @@
-.action-btn.data-v-b8fec3b4 {
+.action-btn.data-v-11e2a6de {
   border-radius: 10rpx;
   width: 122rpx;
   height: 54rpx;
   margin-left: -25rpx;
   font-size: 22rpx;
 }
-.follow.data-v-b8fec3b4 {
+.follow.data-v-11e2a6de {
   color: #808080;
   background: #ddd;
 }
-.icon.data-v-b8fec3b4 {
+.icon.data-v-11e2a6de {
   font-size: 35rpx;
 }
-.avatar.data-v-b8fec3b4 {
+.avatar.data-v-11e2a6de {
   height: 100%;
   width: 100%;
   border-radius: 50%;
 }
-.container.data-v-b8fec3b4 {
+.container.data-v-11e2a6de {
   height: auto;
   width: 94%;
   text-align: center;
@@ -36,11 +36,11 @@
           box-shadow: 2px 2px 5px #e0e0e0;
   background-color: #FFF;
 }
-.container .image.data-v-b8fec3b4 {
+.container .image.data-v-11e2a6de {
     width: 300rpx;
     height: 300rpx;
 }
-.container .content.data-v-b8fec3b4 {
+.container .content.data-v-11e2a6de {
     display: inline-block;
     height: 300rpx;
     padding-top: 150rpx;
